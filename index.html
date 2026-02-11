@@ -3,70 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodFlix | AI Movie Recommender</title>
+    <title>MoodFlix | Premium AI Recommendations</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
-        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        body { background-color: #141414; color: white; }
+        .netflix-red { color: #E50914; }
+        .netflix-card { background: #1f1f1f; transition: transform 0.3s ease; border: 1px solid #333; }
+        .netflix-card:hover { transform: scale(1.05); border-color: #E50914; }
+        .btn-vibe { background-color: #333; transition: all 0.2s; }
+        .btn-vibe:hover { background-color: #E50914; transform: translateY(-2px); }
+        .shimmer { overflow: hidden; position: relative; }
+        .shimmer::before { content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent); animation: load 1.5s infinite; }
+        @keyframes load { from { left: -150%; } to { left: 150%; } }
     </style>
 </head>
-<body class="bg-gray-50 font-sans leading-normal tracking-normal">
+<body class="font-sans">
 
-    <nav class="bg-white p-4 shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-purple-600">MoodFlix 🍿</h1>
-            <div class="space-x-4 text-gray-600 text-sm">
-                <a href="#about" class="hover:text-purple-600">About</a>
-                <a href="#privacy" class="hover:text-purple-600">Privacy</a>
-            </div>
+    <nav class="p-6 flex justify-between items-center bg-black">
+        <h1 class="text-3xl font-black tracking-tighter netflix-red">MOODFLIX</h1>
+        <div class="space-x-6 text-sm font-semibold uppercase tracking-widest text-gray-400">
+            <a href="#tool" class="hover:text-white">Discover</a>
+            <a href="#about" class="hover:text-white">About</a>
         </div>
     </nav>
 
-    <section class="container mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg max-w-2xl text-center">
-        <h2 class="text-3xl font-extrabold mb-4">What's your vibe today?</h2>
-        <p class="text-gray-500 mb-8">We'll pick the perfect movie for your current mood.</p>
-        
-        <div class="grid grid-cols-2 gap-4 mb-8">
-            <button onclick="getMovie('Happy')" class="p-4 border-2 rounded-lg hover:bg-purple-50 border-purple-200 transition">😊 Happy</button>
-            <button onclick="getMovie('Adventurous')" class="p-4 border-2 rounded-lg hover:bg-purple-50 border-purple-200 transition">🌋 Adventurous</button>
-            <button onclick="getMovie('Chilling')" class="p-4 border-2 rounded-lg hover:bg-purple-50 border-purple-200 transition">❄️ Chilling</button>
-            <button onclick="getMovie('Broken')" class="p-4 border-2 rounded-lg hover:bg-purple-50 border-purple-200 transition">💔 Heartbroken</button>
+    <header class="py-20 text-center bg-gradient-to-b from-black to-[#141414]">
+        <h2 class="text-5xl md:text-7xl font-extrabold mb-4 animate__animated animate__fadeIn">Stop scrolling.<br>Start watching.</h2>
+        <p class="text-gray-400 text-xl max-w-xl mx-auto">AI-powered cinematic matches based on your current emotional frequency.</p>
+    </header>
+
+    <main id="tool" class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <button onclick="getMovie('Happy')" class="btn-vibe p-6 rounded-md text-xl font-bold">😊 Happy</button>
+            <button onclick="getMovie('Adventurous')" class="btn-vibe p-6 rounded-md text-xl font-bold">🌋 Brave</button>
+            <button onclick="getMovie('Chilling')" class="btn-vibe p-6 rounded-md text-xl font-bold">❄️ Chilly</button>
+            <button onclick="getMovie('Broken')" class="btn-vibe p-6 rounded-md text-xl font-bold">💔 Hurt</button>
         </div>
 
-        <div id="result" class="hidden p-6 bg-purple-100 rounded-lg border-2 border-purple-300">
-            <h3 class="text-xl font-bold" id="movie-title"></h3>
-            <p class="text-gray-700 mt-2" id="movie-desc"></p>
+        <div id="loader" class="hidden flex flex-col items-center py-20">
+             <div class="w-12 h-12 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+             <p class="mt-4 text-gray-400 italic">Analyzing your vibe...</p>
         </div>
-    </section>
 
-    <div class="container mx-auto mt-10 text-center text-gray-400 text-xs italic">
-        ADVERTISEMENT SPACE
+        <div id="result" class="hidden animate__animated animate__fadeInUp">
+            <div class="netflix-card rounded-lg overflow-hidden flex flex-col md:flex-row shadow-2xl">
+                <div class="md:w-1/3 bg-gray-800 h-64 md:h-auto flex items-center justify-center shimmer">
+                    <span class="text-6xl" id="movie-emoji">🎬</span>
+                </div>
+                <div class="p-8 md:w-2/3">
+                    <span class="uppercase tracking-widest text-red-600 font-bold text-sm">Top Match for You</span>
+                    <h3 class="text-4xl font-black mt-2 mb-4" id="movie-title"></h3>
+                    <p class="text-gray-400 text-lg mb-6 leading-relaxed" id="movie-desc"></p>
+                    <button onclick="window.location.reload()" class="border border-gray-500 px-6 py-2 rounded text-sm hover:bg-white hover:text-black transition">Try Another Mood</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="container mx-auto py-10 border-y border-gray-800 text-center">
+        <p class="text-gray-600 text-xs uppercase tracking-widest">Sponsored Content</p>
+        <div class="h-24 flex items-center justify-center text-gray-700 italic">Ad Space (Pending AdSense Approval)</div>
     </div>
 
-    <footer class="container mx-auto mt-20 p-10 text-gray-600 border-t">
-        <div id="about" class="mb-10">
-            <h3 class="font-bold text-lg">About MoodFlix</h3>
-            <p>MoodFlix is a micro-tool designed to solve "choice paralysis." We use curated data to match your emotional state with the best cinematic experiences.</p>
+    <footer class="container mx-auto py-20 px-6 grid md:grid-cols-2 gap-10 text-gray-500 text-sm">
+        <div id="about">
+            <h4 class="text-white font-bold mb-4 uppercase">Why MoodFlix?</h4>
+            <p>MoodFlix uses a proprietary matching algorithm to bypass "Decision Fatigue." We provide high-utility recommendations to ensure you spend more time watching and less time searching.</p>
         </div>
-        <div id="privacy" class="text-sm">
-            <h3 class="font-bold">Privacy Policy</h3>
-            <p>We do not store your personal data. We use cookies only to analyze traffic for Google AdSense. By using this site, you consent to our use of cookies.</p>
+        <div id="privacy">
+            <h4 class="text-white font-bold mb-4 uppercase">Privacy & Terms</h4>
+            <p>We value your privacy. This site uses cookies to track anonymous traffic for Google AdSense optimization. We do not store personal identification or watch history.</p>
         </div>
-        <p class="mt-10 text-center">© 2026 MoodFlix. All rights reserved.</p>
     </footer>
 
     <script>
         const movies = {
-            Happy: { title: "The Grand Budapest Hotel", desc: "A whimsical, colorful adventure that will leave you smiling." },
-            Adventurous: { title: "Interstellar", desc: "A journey beyond space and time to save humanity." },
-            Chilling: { title: "The Shining", desc: "Perfect for when you want a thrill and some master-class suspense." },
-            Broken: { title: "Eternal Sunshine of the Spotless Mind", desc: "A beautiful exploration of love, loss, and memory." }
+            Happy: [
+                { title: "The Grand Budapest Hotel", desc: "A colorful, comedic masterpiece that feels like a warm hug.", emoji: "🏨" },
+                { title: "Singin' in the Rain", desc: "The ultimate feel-good classic to lift any spirit.", emoji: "☔" }
+            ],
+            Adventurous: [
+                { title: "Interstellar", desc: "A mind-bending journey through space that challenges the limits of human love.", emoji: "🚀" },
+                { title: "Mad Max: Fury Road", desc: "A high-octane visual explosion that will get your adrenaline pumping.", emoji: "🔥" }
+            ],
+            Chilling: [
+                { title: "The Shining", desc: "Masterful psychological horror that will stay with you long after the credits.", emoji: "🪓" },
+                { title: "The Thing", desc: "Peak suspense and practical effects in a frozen, isolated nightmare.", emoji: "👾" }
+            ],
+            Broken: [
+                { title: "Eternal Sunshine", desc: "A poetic look at why we love and why we remember, even when it hurts.", emoji: "🧠" },
+                { title: "Her", desc: "A soulful exploration of loneliness and connection in a near-future world.", emoji: "📱" }
+            ]
         };
 
         function getMovie(mood) {
-            const res = document.getElementById('result');
-            document.getElementById('movie-title').innerText = movies[mood].title;
-            document.getElementById('movie-desc').innerText = movies[mood].desc;
-            res.classList.remove('hidden');
+            // Hide result, show loader
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('loader').classList.remove('hidden');
+
+            setTimeout(() => {
+                const moodList = movies[mood];
+                const randomMovie = moodList[Math.floor(Math.random() * moodList.length)];
+                
+                document.getElementById('movie-title').innerText = randomMovie.title;
+                document.getElementById('movie-desc').innerText = randomMovie.desc;
+                document.getElementById('movie-emoji').innerText = randomMovie.emoji;
+
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('result').classList.remove('hidden');
+            }, 800);
         }
     </script>
 </body>
