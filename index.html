@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodFlix | Viral Cinematic Pulse</title>
+    <title>MoodFlix | Live Cinematic Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
         body { background-color: #050505; color: white; overflow-x: hidden; scroll-behavior: smooth; }
         .netflix-red { color: #E50914; }
-        .mood-card { border: 1px solid #222; transition: all 0.4s; background: #111; cursor: pointer; }
-        .mood-card:hover { transform: translateY(-10px); border-color: #E50914; box-shadow: 0 10px 30px rgba(229, 9, 20, 0.3); }
+        .mood-card { border: 1px solid #222; transition: all 0.3s; background: #111; cursor: pointer; }
+        .mood-card:hover { transform: scale(1.05); border-color: #E50914; box-shadow: 0 10px 30px rgba(229, 9, 20, 0.4); }
         .pulse-dot { animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     </style>
@@ -19,131 +19,92 @@
 
     <nav class="p-6 flex justify-between items-center fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
         <h1 class="text-2xl font-black tracking-tighter netflix-red italic">MOODFLIX</h1>
-        <div class="flex items-center gap-4">
-            <div class="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full text-[10px] font-bold">
-                <span class="w-1.5 h-1.5 bg-red-500 rounded-full pulse-dot"></span>
-                <span id="user-count">4,102</span> PEOPLE DISCOVERING
-            </div>
-            <a href="#about" class="text-xs font-bold uppercase hover:text-red-500 transition">About</a>
+        <div class="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full text-[10px] font-bold">
+            <span class="w-1.5 h-1.5 bg-red-500 rounded-full pulse-dot"></span>
+            <span id="user-count">3,821</span> LIVE STREAMS
         </div>
     </nav>
 
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6">
-        <div class="mb-4 inline-block bg-red-600/10 text-red-500 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest">
-            2026 AI Recommendation Engine
-        </div>
-        <h2 class="text-6xl md:text-9xl font-black mb-8 leading-none tracking-tighter">FIND YOUR<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-purple-600">CINEMATIC PULSE.</span></h2>
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-20">
+        <h2 class="text-5xl md:text-8xl font-black mb-12 tracking-tighter uppercase">PICK YOUR <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-purple-600">PULSE.</span></h2>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl mt-10">
-            <div onclick="revealMovie('Happy')" class="mood-card p-10 rounded-2xl">
-                <span class="text-4xl">😎</span>
-                <p class="mt-4 font-bold uppercase tracking-widest text-xs text-gray-400">Radiant</p>
-            </div>
-            <div onclick="revealMovie('Dark')" class="mood-card p-10 rounded-2xl">
-                <span class="text-4xl">🖤</span>
-                <p class="mt-4 font-bold uppercase tracking-widest text-xs text-gray-400">Vengeful</p>
-            </div>
-            <div onclick="revealMovie('Mindblown')" class="mood-card p-10 rounded-2xl">
-                <span class="text-4xl">🤯</span>
-                <p class="mt-4 font-bold uppercase tracking-widest text-xs text-gray-400">Cosmic</p>
-            </div>
-            <div onclick="revealMovie('Hurt')" class="mood-card p-10 rounded-2xl">
-                <span class="text-4xl">🥀</span>
-                <p class="mt-4 font-bold uppercase tracking-widest text-xs text-gray-400">Healing</p>
-            </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 w-full max-w-7xl">
+            <div onclick="fetchMovie('Supernatural')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">😎</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Radiant</p></div>
+            <div onclick="fetchMovie('Revenge')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">🖤</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Vengeful</p></div>
+            <div onclick="fetchMovie('Adventure')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">🌋</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Heroic</p></div>
+            <div onclick="fetchMovie('Space')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">🌀</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Cosmic</p></div>
+            <div onclick="fetchMovie('Drama')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">🥀</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Healing</p></div>
+            <div onclick="fetchMovie('Mystery')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">❄️</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Isolated</p></div>
+            <div onclick="fetchMovie('Hacker')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">🧠</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Genius</p></div>
+            <div onclick="fetchMovie('Horror')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">👻</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Terrified</p></div>
+            <div onclick="fetchMovie('Heist')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">💰</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Wealthy</p></div>
+            <div onclick="fetchMovie('Survival')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">🦁</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Primal</p></div>
+            <div onclick="fetchMovie('Fantasy')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">☁️</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Ethereal</p></div>
+            <div onclick="fetchMovie('War')" class="mood-card p-6 rounded-xl text-center"><span class="text-3xl">🔥</span><p class="text-[10px] mt-2 font-bold uppercase text-gray-400">Furious</p></div>
         </div>
     </section>
 
     <section id="discovery" class="hidden min-h-screen bg-[#0a0a0a] py-32 px-6 border-t border-white/5">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col md:flex-row gap-12 items-center">
-                <div class="w-full md:w-1/2 aspect-[2/3] bg-neutral-900 rounded-3xl overflow-hidden shadow-2xl relative border border-white/10">
-                    <div id="movie-emoji" class="absolute inset-0 flex items-center justify-center text-[10rem] opacity-20">🎬</div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                    <div class="absolute bottom-10 left-10">
-                        <span id="genre-tag" class="bg-red-600 text-[10px] font-black uppercase px-3 py-1 rounded-full mb-4 inline-block">Top Match</span>
-                        <h3 id="movie-name" class="text-6xl font-black italic uppercase leading-none">MOVIE NAME</h3>
-                    </div>
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-center">
+            <div class="w-full md:w-1/2 aspect-[2/3] bg-neutral-900 rounded-3xl overflow-hidden shadow-2xl relative border border-white/10">
+                <img id="movie-poster" src="" alt="Poster" class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                <div class="absolute bottom-10 left-10">
+                    <h3 id="movie-name" class="text-5xl font-black italic uppercase leading-tight text-white"></h3>
                 </div>
-                <div class="w-full md:w-1/2">
-                    <p id="movie-tagline" class="text-red-500 font-bold uppercase tracking-[0.3em] mb-4 text-sm">TAGLINE</p>
-                    <p id="movie-description" class="text-neutral-400 text-xl leading-relaxed mb-10">Description goes here.</p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <a id="link-search" href="#" target="_blank" class="flex items-center justify-center gap-3 bg-white text-black py-4 rounded-xl font-black hover:bg-neutral-200 transition">
-                            WHERE TO WATCH
-                        </a>
-                        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="border border-white/20 py-4 rounded-xl font-black hover:bg-white/5 transition uppercase tracking-widest text-xs">
-                            New Vibe
-                        </button>
-                    </div>
-                </div>
+            </div>
+            <div class="w-full md:w-1/2">
+                <p id="movie-year" class="text-red-500 font-bold uppercase tracking-[0.3em] mb-4 text-sm"></p>
+                <p id="movie-description" class="text-neutral-400 text-xl leading-relaxed mb-10"></p>
+                <a id="link-search" href="#" target="_blank" class="inline-block bg-white text-black px-10 py-4 rounded-xl font-black hover:bg-neutral-200 transition uppercase tracking-widest text-xs">Watch Online</a>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 px-6 border-t border-white/5 text-neutral-600 text-[10px] uppercase tracking-widest font-bold">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-10">
-            <div id="about" class="max-w-xs">
-                <p class="text-white mb-4">MoodFlix Engine</p>
-                Bypassing 2026 scroll-fatigue with mood-based cinematic metadata.
-            </div>
-            <div id="privacy">
-                <p class="text-white mb-4">Privacy</p>
-                Cookies are used for traffic analysis and future AdSense integration.
-            </div>
-        </div>
-    </footer>
-
     <script>
-        const vault = {
-            Happy: [
-                { n: "The Fall Guy", t: "Pure Joy", d: "A love letter to stuntmen and the magic of cinema. It's impossible not to smile.", e: "🔫" },
-                { n: "Everything Everywhere All At Once", t: "Chaotic Happiness", d: "A multiverse adventure about kindness and family.", e: "🥯" }
-            ],
-            Dark: [
-                { n: "Saltburn", t: "Twisted Obsession", d: "A gothic thriller for the modern age. Dark and beautiful.", e: "🍷" },
-                { n: "The Batman", t: "Shadowed Vengeance", d: "A rainy, gritty detective noir that redefined the genre.", e: "🦇" }
-            ],
-            Mindblown: [
-                { n: "Dune: Part Two", t: "Cosmic Scale", d: "The definitive sci-fi epic. A visual experience that transcends standard film.", e: "⏳" },
-                { n: "Inception", t: "Mind Labyrinth", d: "A heist inside a dream. The film that still has the world debating.", e: "🌀" }
-            ],
-            Hurt: [
-                { n: "Past Lives", t: "Soul Echoes", d: "A quiet, devastating look at the people we could have been.", e: "🚉" },
-                { n: "Eternal Sunshine", t: "Memory Healing", d: "A poetic masterpiece about why we love even when it ends in pain.", e: "🧠" }
-            ]
-        };
+        // PASTE YOUR ACTIVATED OMDB KEY HERE
+        const API_KEY = 'f82e33d3';
 
-        function revealMovie(mood) {
-            console.log("Button clicked for mood:", mood); // For debugging
-            const list = vault[mood];
-            const movie = list[Math.floor(Math.random() * list.length)];
-            
-            // Update Elements
-            document.getElementById('movie-name').innerText = movie.n;
-            document.getElementById('movie-tagline').innerText = movie.t;
-            document.getElementById('movie-description').innerText = movie.d;
-            document.getElementById('movie-emoji').innerText = movie.e;
-            
-            // Dynamic Platform Link (Future-Proof Search)
-            document.getElementById('link-search').href = `https://www.google.com/search?q=watch+${movie.n.replace(/ /g, '+')}+on+streaming`;
+        async function fetchMovie(keyword) {
+            // First, search for a list of movies using the keyword
+            const searchUrl = `https://www.omdbapi.com/?s=${keyword}&apikey=${API_KEY}&type=movie`;
 
-            // Reveal and Scroll
-            const discovery = document.getElementById('discovery');
-            discovery.classList.remove('hidden');
-            
-            // Allow a tiny delay for browser to unhide before scrolling
-            setTimeout(() => {
-                discovery.scrollIntoView({ behavior: 'smooth' });
-            }, 50);
+            try {
+                const searchResponse = await fetch(searchUrl);
+                const searchData = await searchResponse.json();
+                
+                if (searchData.Response === "True") {
+                    const movies = searchData.Search;
+                    const randomChoice = movies[Math.floor(Math.random() * movies.length)];
+                    
+                    // Second, fetch the full details for that specific movie
+                    const detailUrl = `https://www.omdbapi.com/?i=${randomChoice.imdbID}&apikey=${API_KEY}&plot=full`;
+                    const detailResponse = await fetch(detailUrl);
+                    const movie = await detailResponse.json();
+
+                    // Update UI
+                    document.getElementById('movie-name').innerText = movie.Title;
+                    document.getElementById('movie-description').innerText = movie.Plot.substring(0, 250) + "...";
+                    document.getElementById('movie-year').innerText = `Released: ${movie.Year} | ${movie.imdbRating} IMDB`;
+                    document.getElementById('movie-poster').src = movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/500x750?text=No+Poster";
+                    document.getElementById('link-search').href = `https://www.google.com/search?q=watch+${movie.Title.replace(/ /g, '+')}+online`;
+
+                    const discovery = document.getElementById('discovery');
+                    discovery.classList.remove('hidden');
+                    setTimeout(() => discovery.scrollIntoView({ behavior: 'smooth' }), 50);
+                } else {
+                    alert("The cinematic pulse is weak. Try another vibe!");
+                }
+            } catch (error) {
+                console.error("API Error:", error);
+            }
         }
 
-        // Global Watcher Pulse Logic
+        // Live Counter Pulse
         setInterval(() => {
             const el = document.getElementById('user-count');
             let count = parseInt(el.innerText.replace(',', ''));
-            count += Math.floor(Math.random() * 5) - 2;
+            count += Math.floor(Math.random() * 3) - 1;
             el.innerText = count.toLocaleString();
         }, 3000);
     </script>
