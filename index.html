@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodFlix | AI Movie Recommender</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans leading-normal tracking-normal">
+
+    <nav class="bg-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-purple-600">MoodFlix 🍿</h1>
+            <div class="space-x-4 text-gray-600 text-sm">
+                <a href="#about" class="hover:text-purple-600">About</a>
+                <a href="#privacy" class="hover:text-purple-600">Privacy</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg max-w-2xl text-center">
+        <h2 class="text-3xl font-extrabold mb-4">What's your vibe today?</h2>
+        <p class="text-gray-500 mb-8">We'll pick the perfect movie for your current mood.</p>
+        
+        <div class="grid grid-cols-2 gap-4 mb-8">
+            <button onclick="getMovie('Happy')" class="p-4 border-2 rounded-lg hover:bg-purple-50 border-purple-200 transition">😊 Happy</button>
+            <button onclick="getMovie('Adventurous')" class="p-4 border-2 rounded-lg hover:bg-purple-50 border-purple-200 transition">🌋 Adventurous</button>
+            <button onclick="getMovie('Chilling')" class="p-4 border-2 rounded-lg hover:bg-purple-50 border-purple-200 transition">❄️ Chilling</button>
+            <button onclick="getMovie('Broken')" class="p-4 border-2 rounded-lg hover:bg-purple-50 border-purple-200 transition">💔 Heartbroken</button>
+        </div>
+
+        <div id="result" class="hidden p-6 bg-purple-100 rounded-lg border-2 border-purple-300">
+            <h3 class="text-xl font-bold" id="movie-title"></h3>
+            <p class="text-gray-700 mt-2" id="movie-desc"></p>
+        </div>
+    </section>
+
+    <div class="container mx-auto mt-10 text-center text-gray-400 text-xs italic">
+        ADVERTISEMENT SPACE
+    </div>
+
+    <footer class="container mx-auto mt-20 p-10 text-gray-600 border-t">
+        <div id="about" class="mb-10">
+            <h3 class="font-bold text-lg">About MoodFlix</h3>
+            <p>MoodFlix is a micro-tool designed to solve "choice paralysis." We use curated data to match your emotional state with the best cinematic experiences.</p>
+        </div>
+        <div id="privacy" class="text-sm">
+            <h3 class="font-bold">Privacy Policy</h3>
+            <p>We do not store your personal data. We use cookies only to analyze traffic for Google AdSense. By using this site, you consent to our use of cookies.</p>
+        </div>
+        <p class="mt-10 text-center">© 2026 MoodFlix. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const movies = {
+            Happy: { title: "The Grand Budapest Hotel", desc: "A whimsical, colorful adventure that will leave you smiling." },
+            Adventurous: { title: "Interstellar", desc: "A journey beyond space and time to save humanity." },
+            Chilling: { title: "The Shining", desc: "Perfect for when you want a thrill and some master-class suspense." },
+            Broken: { title: "Eternal Sunshine of the Spotless Mind", desc: "A beautiful exploration of love, loss, and memory." }
+        };
+
+        function getMovie(mood) {
+            const res = document.getElementById('result');
+            document.getElementById('movie-title').innerText = movies[mood].title;
+            document.getElementById('movie-desc').innerText = movies[mood].desc;
+            res.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
