@@ -1,0 +1,8 @@
+# HARDFACTS — robots.txt
+# Allow all search engines to index this site
+
+User-agent: *
+Allow: /
+
+# Sitemap location (update YOUR_SITE_URL after deploying)
+Sitemap: https://YOUR_SITE_URL/sitemap.xml

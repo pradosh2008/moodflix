@@ -10,7 +10,7 @@ const ARTICLES = [
     subtitle: "Two decades after an invasion justified by weapons that never existed, Iraq's oil flows outward while millions remain in poverty. A hard look at what really happened — and what continues today.",
     excerpt: "The 2003 invasion was sold as liberation. What followed — the oil contracts, the permanent military bases, the IMF conditions, the looted heritage — tells a darker and more consequential story.",
     category: "Geopolitics",
-    author: { name: "James Harford", initials: "JH", color: "#EC4899", role: "Investigative Foreign Policy Reporter" },
+    author: { name: "Pradosh Kumar", initials: "PK", color: "#EC4899", role: "Investigative Reporter & Founder, HARDFACTS" },
     date: "March 1, 2026",
     dateISO: "2026-03-01",
     readTime: 15,

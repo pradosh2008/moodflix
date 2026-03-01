@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publish Across Platforms — HARDFACTS</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root {
+      --gold: #C9A035;
+      --bg: #0A0909;
+      --surface: #111010;
+      --surface2: #181616;
+      --border: rgba(255,255,255,0.08);
+      --text: #FFFFFF;
+      --text-dim: rgba(255,255,255,0.5);
+      --green: #10B981;
+      --red: #EF4444;
+    }
+    html, body { background: var(--bg) !important; color: var(--text); font-family: 'Inter', sans-serif; }
+
+    .site-header { background: rgba(10,9,9,0.97) !important; border-bottom: 1px solid var(--border) !important; }
+    .nav-logo__word { font-family: 'Playfair Display', serif !important; color: var(--gold) !important; font-size: 22px !important; font-weight: 800 !important; letter-spacing: 0.1em !important; }
+    .nav-logo__tagline { color: rgba(201,160,53,0.4) !important; font-size: 9px !important; letter-spacing: 0.2em !important; }
+    .nav-links a { color: rgba(255,255,255,0.6) !important; font-size: 14px !important; }
+    .nav-links a:hover { color: #fff !important; }
+
+    .pub-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+    .pub-header {
+      margin-bottom: 48px;
+    }
+    .pub-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .pub-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .pub-sub {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* Article preview */
+    .article-preview {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .article-preview__icon { font-size: 32px; flex-shrink: 0; margin-top: 2px; }
+    .article-preview__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .article-preview__meta { font-size: 12px; color: var(--text-dim); }
+
+    /* Platform cards */
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .platform-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .platform-card:hover { border-color: rgba(201,160,53,0.25); }
+    .platform-card.success { border-color: rgba(16,185,129,0.4); }
+    .platform-card.error   { border-color: rgba(239,68,68,0.4); }
+
+    .platform-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .platform-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .platform-logo.devto    { background: #0a0a0a; border: 1px solid #333; }
+    .platform-logo.hashnode { background: #2962FF; }
+    .platform-logo.medium   { background: #000; border: 1px solid #333; }
+
+    .platform-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .platform-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .form-field { margin-bottom: 14px; }
+    .form-field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .form-field input, .form-field select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 5px;
+      color: #fff;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-family: 'Inter', monospace;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-field input:focus, .form-field select:focus { border-color: var(--gold); }
+    .form-field input::placeholder { color: rgba(255,255,255,0.2); }
+    .form-field select option { background: #1a1a1a; }
+
+    .platform-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .btn-publish {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .btn-publish:hover { background: #A07820; }
+    .btn-publish:disabled { background: #555; cursor: not-allowed; }
+    .btn-getkey {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-getkey:hover { border-color: rgba(255,255,255,0.35); color: rgba(255,255,255,0.8); }
+
+    .platform-status {
+      display: none;
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 5px;
+      font-size: 13px;
+      font-weight: 500;
+      align-items: center;
+      gap: 8px;
+    }
+    .platform-status.show { display: flex; }
+    .platform-status.ok  { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25); color: #10B981; }
+    .platform-status.err { background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.25);  color: #EF4444; }
+
+    /* CORS / Medium warning */
+    .platform-note {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: rgba(201,160,53,0.07);
+      border: 1px solid rgba(201,160,53,0.2);
+      border-radius: 5px;
+      font-size: 12px;
+      color: rgba(201,160,53,0.8);
+      line-height: 1.6;
+    }
+
+    /* How to get searchable section */
+    .seo-guide {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .seo-guide__title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .seo-guide__steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      counter-reset: step;
+    }
+    .seo-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      counter-increment: step;
+    }
+    .seo-step::before {
+      content: counter(step);
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: rgba(201,160,53,0.15);
+      border: 1px solid rgba(201,160,53,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .seo-step__text { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+    .seo-step__text strong { color: rgba(255,255,255,0.7); }
+    .seo-step__text a { color: var(--gold); text-decoration: underline; }
+
+    /* Footer */
+    .pub-footer { text-align: center; padding: 20px 0; font-size: 12px; color: rgba(255,255,255,0.2); }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<header class="site-header">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__word">HARDFACTS</span>
+      <span class="nav-logo__tagline">Truth Without Filter</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="article.html?slug=usa-exploitation-iraq">The Iraq Report</a>
+    </nav>
+  </div>
+</header>
+
+<div class="pub-wrap">
+
+  <!-- Header -->
+  <div class="pub-header">
+    <div class="pub-label">Admin Tool</div>
+    <h1 class="pub-title">Publish Across Platforms</h1>
+    <p class="pub-sub">
+      Amplify your reach by publishing the Iraq Report to developer and writing platforms.
+      Each platform drives traffic back to HARDFACTS.
+    </p>
+  </div>
+
+  <!-- Article being published -->
+  <div class="article-preview">
+    <div class="article-preview__icon">🛢️</div>
+    <div>
+      <div class="article-preview__title">
+        Oil, Power, and Deception: How the USA Has Exploited Iraq Since 2003
+      </div>
+      <div class="article-preview__meta">By Pradosh Kumar · March 1, 2026 · 15 min read · Geopolitics</div>
+    </div>
+  </div>
+
+  <!-- Platform cards -->
+  <div class="platforms-grid">
+
+    <!-- Dev.to -->
+    <div class="platform-card" id="card-devto">
+      <div class="platform-header">
+        <div class="platform-logo devto">📝</div>
+        <div>
+          <div class="platform-name">Dev.to</div>
+          <div class="platform-desc">Developer & tech writing community. Supports CORS.</div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>API Key</label>
+        <input type="password" id="devto-key" placeholder="Paste your dev.to API key here">
+      </div>
+
+      <div class="platform-actions">
+        <button class="btn-publish" onclick="publishDevto()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Publish to Dev.to
+        </button>
+        <a href="https://dev.to/settings/extensions" target="_blank" rel="noopener" class="btn-getkey">
+          Get API Key ↗
+        </a>
+      </div>
+
+      <div class="platform-status" id="devto-status"></div>
+    </div>
+
+    <!-- Hashnode -->
+    <div class="platform-card" id="card-hashnode">
+      <div class="platform-header">
+        <div class="platform-logo hashnode">H</div>
+        <div>
+          <div class="platform-name">Hashnode</div>
+          <div class="platform-desc">Blogging platform with strong SEO reach.</div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Personal Access Token</label>
+        <input type="password" id="hashnode-token" placeholder="Paste your Hashnode token here">
+      </div>
+      <div class="form-field">
+        <label>Publication ID (from Hashnode dashboard)</label>
+        <input type="text" id="hashnode-pubid" placeholder="e.g. 64abc123def456">
+      </div>
+
+      <div class="platform-actions">
+        <button class="btn-publish" onclick="publishHashnode()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Publish to Hashnode
+        </button>
+        <a href="https://hashnode.com/settings/developer" target="_blank" rel="noopener" class="btn-getkey">
+          Get Token ↗
+        </a>
+      </div>
+
+      <div class="platform-status" id="hashnode-status"></div>
+    </div>
+
+    <!-- Medium (instructions only — CORS blocked) -->
+    <div class="platform-card" id="card-medium">
+      <div class="platform-header">
+        <div class="platform-logo medium">M</div>
+        <div>
+          <div class="platform-name">Medium</div>
+          <div class="platform-desc">Large general audience. 100M+ readers.</div>
+        </div>
+      </div>
+
+      <div class="platform-note">
+        ⚠️ Medium's API blocks browser requests (CORS policy). To publish on Medium, use the
+        <strong>Import Story</strong> tool in Medium's editor: paste your article URL
+        <code style="background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:3px">
+          article.html?slug=usa-exploitation-iraq
+        </code>
+        after deploying your site.
+      </div>
+
+      <div class="platform-actions" style="margin-top:14px">
+        <a href="https://medium.com/p/import" target="_blank" rel="noopener" class="btn-publish" style="text-decoration:none">
+          Open Medium Import ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Twitter/X -->
+    <div class="platform-card">
+      <div class="platform-header">
+        <div class="platform-logo devto" style="font-size:18px;font-weight:900;color:#fff;">𝕏</div>
+        <div>
+          <div class="platform-name">Twitter / X</div>
+          <div class="platform-desc">Share a thread to drive traffic.</div>
+        </div>
+      </div>
+
+      <div class="platform-actions" style="margin-top:0">
+        <a id="twitter-share-btn" href="#" target="_blank" rel="noopener" class="btn-publish" style="text-decoration:none">
+          Share Thread on X ↗
+        </a>
+      </div>
+
+      <div class="platform-note" style="margin-top:12px">
+        Click the button to open a pre-composed thread. Replace YOUR_SITE_URL with your actual deployed URL first.
+      </div>
+    </div>
+
+    <!-- LinkedIn -->
+    <div class="platform-card">
+      <div class="platform-header">
+        <div class="platform-logo hashnode" style="background:#0A66C2;font-weight:700;color:#fff;font-size:14px;">in</div>
+        <div>
+          <div class="platform-name">LinkedIn</div>
+          <div class="platform-desc">Professional audience, great for visibility.</div>
+        </div>
+      </div>
+
+      <div class="platform-actions" style="margin-top:0">
+        <a id="linkedin-share-btn" href="#" target="_blank" rel="noopener" class="btn-publish" style="text-decoration:none">
+          Share on LinkedIn ↗
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- How to get searchable on Google -->
+  <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:20px">
+    How to Get Searchable on Google
+  </h2>
+
+  <div class="seo-guide">
+    <div class="seo-guide__title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Step-by-step: Get HARDFACTS indexed by Google
+    </div>
+    <div class="seo-guide__steps">
+      <div class="seo-step">
+        <div class="seo-step__text">
+          <strong>Deploy your site</strong> on Netlify, GitHub Pages, or Vercel.
+          Drag the <code style="background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:3px">moodflix</code> folder to
+          <a href="https://app.netlify.com/drop" target="_blank">netlify.com/drop</a> — takes 60 seconds.
+        </div>
+      </div>
+      <div class="seo-step">
+        <div class="seo-step__text">
+          <strong>Open <code style="background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:3px">sitemap.xml</code> and <code style="background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:3px">robots.txt</code></strong>
+          in this project folder. Replace <code>YOUR_SITE_URL</code> with your live URL (e.g. <em>https://hardfacts.netlify.app</em>).
+        </div>
+      </div>
+      <div class="seo-step">
+        <div class="seo-step__text">
+          <strong>Go to <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a></strong>,
+          add your site as a property, and verify ownership by adding a meta tag or uploading an HTML file.
+        </div>
+      </div>
+      <div class="seo-step">
+        <div class="seo-step__text">
+          <strong>Submit your sitemap</strong> in Search Console:
+          Sitemaps → enter <em>sitemap.xml</em> → Submit.
+          Google will begin crawling within 1-7 days.
+        </div>
+      </div>
+      <div class="seo-step">
+        <div class="seo-step__text">
+          <strong>Request indexing</strong> for both pages (home + article) using the
+          <em>URL Inspection</em> tool in Search Console → "Request Indexing".
+          This speeds up discovery.
+        </div>
+      </div>
+      <div class="seo-step">
+        <div class="seo-step__text">
+          <strong>Build backlinks</strong> by sharing on Reddit (r/geopolitics, r/worldnews),
+          publishing on Dev.to/Hashnode (links above), and posting on LinkedIn/X with your site URL.
+          Backlinks are the #1 ranking signal.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pub-footer">
+    HARDFACTS Admin · Not indexed by search engines · For Pradosh Kumar only
+  </div>
+
+</div>
+
+<script>
+  /* ── Article content for API publishing ── */
+  const ARTICLE = {
+    title: "Oil, Power, and Deception: How the USA Has Exploited Iraq Since 2003",
+    tags: ["geopolitics", "iraq", "usa", "war", "oil"],
+    canonical: "YOUR_SITE_URL/article.html?slug=usa-exploitation-iraq",
+    body_markdown: `Two decades after an invasion justified by weapons that never existed, Iraq's oil flows outward while millions remain in poverty. This is the story of systematic exploitation.
+
+## The Lie That Launched a War
+
+The 2003 US invasion of Iraq was sold to the world on the basis of weapons of mass destruction that didn't exist. The CIA's October 2002 National Intelligence Estimate and Colin Powell's February 2003 UN presentation presented fabricated and cherry-picked intelligence as definitive proof. The Downing Street Memo, leaked in 2005, confirmed that "intelligence and facts were being fixed around the policy."
+
+The Iraq Survey Group — established by the US itself — concluded in 2004 that Iraq had *no active WMD programs* at the time of invasion. Saddam had dismantled them after the Gulf War.
+
+## The Oil That Was Always the Point
+
+Iraq sits atop the world's fifth-largest proven oil reserves. Before the invasion, its oil was nationalized and contracts were held by French, Russian, and Chinese companies. American and British oil majors were locked out.
+
+Within two years of the invasion, Coalition Provisional Authority Order 39 opened Iraq's economy to full foreign ownership. By 2009, ExxonMobil, BP, Shell, and other Western majors had signed long-term oil contracts. Iraq's oil production today exceeds 4 million barrels per day — yet 22.5% of Iraq's population lives in poverty.
+
+## The Permanent Military Footprint
+
+The US constructed permanent military installations — Balad Air Base, Camp Victory, Ain al-Assad — designed for long-term strategic positioning. When the Iraqi parliament voted in January 2020 to expel all foreign troops, the US government largely ignored it.
+
+## The Human Cost
+
+Between 183,000–206,000 Iraqi civilians died from direct violence between 2003–2019. 3.3 million were internally displaced. Iraq's Christian community, 1.5 million before 2003, has been reduced to fewer than 200,000.
+
+## The Hard Conclusion
+
+What happened in Iraq was not a failed liberation. It was a successful exploitation, dressed in the language of liberation. The people who paid the price — in lives, displacement, and destroyed infrastructure — were the Iraqis. That bill is still being paid today.
+
+---
+
+*By Pradosh Kumar — Investigative Reporter, HARDFACTS*
+*Free to read at: YOUR_SITE_URL/article.html?slug=usa-exploitation-iraq*`
+  };
+
+  /* ── Dev.to publishing ── */
+  async function publishDevto() {
+    const key = document.getElementById('devto-key').value.trim();
+    const statusEl = document.getElementById('devto-status');
+
+    if (!key) { showStatus('devto-status', 'err', 'Please enter your Dev.to API key.'); return; }
+
+    showStatus('devto-status', 'ok', 'Publishing to Dev.to…');
+
+    try {
+      const res = await fetch('https://dev.to/api/articles', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': key
+        },
+        body: JSON.stringify({
+          article: {
+            title: ARTICLE.title,
+            body_markdown: ARTICLE.body_markdown,
+            published: true,
+            tags: ARTICLE.tags,
+            canonical_url: ARTICLE.canonical.replace('YOUR_SITE_URL', window.location.origin)
+          }
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        showStatus('devto-status', 'ok', `✓ Published! View at: dev.to${data.path}`);
+        document.getElementById('card-devto').classList.add('success');
+      } else {
+        const err = await res.json();
+        showStatus('devto-status', 'err', `Error ${res.status}: ${err.error || JSON.stringify(err)}`);
+      }
+    } catch (e) {
+      showStatus('devto-status', 'err', 'Network error — check your API key and try again.');
+    }
+  }
+
+  /* ── Hashnode publishing ── */
+  async function publishHashnode() {
+    const token  = document.getElementById('hashnode-token').value.trim();
+    const pubId  = document.getElementById('hashnode-pubid').value.trim();
+    const statusEl = document.getElementById('hashnode-status');
+
+    if (!token || !pubId) {
+      showStatus('hashnode-status', 'err', 'Please enter both your token and Publication ID.');
+      return;
+    }
+
+    showStatus('hashnode-status', 'ok', 'Publishing to Hashnode…');
+
+    const mutation = `
+      mutation PublishPost($input: PublishPostInput!) {
+        publishPost(input: $input) {
+          post { id url title }
+        }
+      }
+    `;
+    const variables = {
+      input: {
+        title: ARTICLE.title,
+        contentMarkdown: ARTICLE.body_markdown,
+        publicationId: pubId,
+        tags: ARTICLE.tags.map(t => ({ slug: t, name: t }))
+      }
+    };
+
+    try {
+      const res = await fetch('https://gql.hashnode.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token
+        },
+        body: JSON.stringify({ query: mutation, variables })
+      });
+
+      const data = await res.json();
+      if (data.errors) {
+        showStatus('hashnode-status', 'err', 'Error: ' + data.errors[0].message);
+      } else if (data.data?.publishPost?.post?.url) {
+        showStatus('hashnode-status', 'ok', '✓ Published! View at: ' + data.data.publishPost.post.url);
+        document.getElementById('card-hashnode').classList.add('success');
+      } else {
+        showStatus('hashnode-status', 'err', 'Unexpected response. Check your token and Publication ID.');
+      }
+    } catch (e) {
+      showStatus('hashnode-status', 'err', 'Network error — ' + e.message);
+    }
+  }
+
+  /* ── Helper ── */
+  function showStatus(id, type, msg) {
+    const el = document.getElementById(id);
+    el.className = 'platform-status show ' + type;
+    el.innerHTML = (type === 'ok'
+      ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>'
+      : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>')
+      + msg;
+  }
+
+  /* ── Pre-fill share links ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    const siteUrl  = encodeURIComponent(window.location.origin + '/article.html?slug=usa-exploitation-iraq');
+    const title    = encodeURIComponent('Oil, Power, and Deception: How the USA Has Exploited Iraq Since 2003 — HARDFACTS');
+    const tweet    = encodeURIComponent('🛢️ New investigation by @PradoshKumar:\n\n"Oil, Power, and Deception: How the USA Has Exploited Iraq Since 2003"\n\nThe fabricated WMDs, the oil contracts, the permanent bases, the human cost.\n\n👉 Read the full report: ');
+
+    document.getElementById('twitter-share-btn').href =
+      `https://twitter.com/intent/tweet?text=${tweet}${siteUrl}`;
+
+    document.getElementById('linkedin-share-btn').href =
+      `https://www.linkedin.com/sharing/share-offsite/?url=${siteUrl}`;
+  });
+</script>
+
+</body>
+</html>
