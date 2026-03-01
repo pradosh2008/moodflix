@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive — MERIDIAN</title>
+  <meta name="description" content="Browse the complete archive of analytical articles published on MERIDIAN.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ── Search Overlay ───────────────────────────────────────── -->
+<div id="search-overlay" class="search-overlay">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="search-input" type="text" placeholder="Search articles…" autocomplete="off">
+      <button id="search-close" style="color:var(--text-muted);font-size:13px;font-weight:600">ESC</button>
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+
+<!-- ── Site Header ──────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__word">MERIDIAN</span>
+      <span class="nav-logo__tagline">Analysis · Insight · Clarity</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="category.html?cat=Technology">Technology</a>
+      <a href="category.html?cat=Economy">Economy</a>
+      <a href="category.html?cat=Geopolitics">Geopolitics</a>
+      <a href="category.html?cat=Science">Science</a>
+      <a href="category.html?cat=Culture">Culture</a>
+      <a href="category.html?cat=Environment">Environment</a>
+      <a href="archive.html" class="active">Archive</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn-search" id="search-open"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+      <button class="btn-theme" onclick="toggleTheme()"><span id="theme-icon">🌙</span></button>
+      <a href="index.html#newsletter" class="btn-subscribe">Subscribe</a>
+      <button class="nav-hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ── Archive Hero ─────────────────────────────────────────── -->
+<div class="archive-hero">
+  <div class="container">
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Complete Archive</div>
+    <h1 class="archive-hero__title">Every Article, Every Analysis</h1>
+    <p class="archive-hero__subtitle">A growing body of analytical work across seven topic categories. Free to read.</p>
+    <div style="display:flex;align-items:center;gap:24px;justify-content:center;margin-top:28px;flex-wrap:wrap" id="archive-stats">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ── Archive Filters ──────────────────────────────────────── -->
+<main>
+  <div class="container">
+    <div class="archive-filters">
+      <span class="archive-filter-label">Filter:</span>
+      <div style="display:flex;gap:6px;flex-wrap:wrap" id="archive-filter-tabs">
+        <button class="category-tab active" data-cat="all">All Topics</button>
+        <!-- Rendered by JS -->
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+        <label style="font-size:12px;color:var(--text-muted);font-weight:500">Sort:</label>
+        <select id="sort-select" style="font-size:12px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg-card);color:var(--text-primary);outline:none;cursor:pointer">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="readtime">Read Time</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Article count -->
+    <div style="padding:16px 0;font-size:13px;color:var(--text-muted)" id="archive-count">
+      Loading articles…
+    </div>
+
+    <!-- Archive grid -->
+    <div class="archive-grid" id="archive-grid">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Timeline view toggle -->
+    <div style="padding:48px 0;border-top:1px solid var(--border);margin-top:32px">
+      <div class="section-header">
+        <div class="section-title">Archive by Date</div>
+      </div>
+      <div id="timeline-view" style="display:flex;flex-direction:column;gap:0">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── Newsletter ────────────────────────────────────────────── -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-eyebrow">Stay Informed</div>
+    <h2 class="newsletter-title">New Articles, Delivered</h2>
+    <p class="newsletter-subtitle">Subscribe to get new analytical pieces as they're published.</p>
+    <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit">Subscribe Free</button>
+    </form>
+    <p class="newsletter-note">Free forever. No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand__logo">MERIDIAN</div>
+        <div class="footer-brand__tagline">Analysis · Insight · Clarity</div>
+        <p class="footer-brand__desc">Independent analytical journalism. Free to read, always.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__title">Topics</div>
+        <ul>
+          <li><a href="category.html?cat=Technology">Technology</a></li>
+          <li><a href="category.html?cat=Economy">Economy</a></li>
+          <li><a href="category.html?cat=Geopolitics">Geopolitics</a></li>
+          <li><a href="category.html?cat=Science">Science</a></li>
+          <li><a href="category.html?cat=Culture">Culture</a></li>
+          <li><a href="category.html?cat=Environment">Environment</a></li>
+          <li><a href="category.html?cat=Politics">Politics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__title">Publication</div>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="archive.html">Archive</a></li>
+          <li><a href="index.html#newsletter">Newsletter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__title">Legal</div>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom__copy">© 2026 MERIDIAN. All rights reserved.</span>
+      <div class="footer-bottom__links">
+        <a href="index.html">Home</a>
+        <a href="archive.html">Archive</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/articles-data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Stats bar
+    const statsEl = document.getElementById('archive-stats');
+    if (statsEl && typeof ARTICLES !== 'undefined') {
+      const totalReadTime = ARTICLES.reduce((s, a) => s + a.readTime, 0);
+      statsEl.innerHTML = [
+        { num: ARTICLES.length, label: 'Articles' },
+        { num: CATEGORIES.length, label: 'Categories' },
+        { num: Math.round(totalReadTime / 60) + 'h', label: 'of Reading' },
+        { num: '2026', label: 'Est.' }
+      ].map(s => `
+        <div style="text-align:center">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:var(--accent)">${s.num}</div>
+          <div style="font-size:11px;color:#4A6080;font-weight:600;letter-spacing:0.1em;text-transform:uppercase">${s.label}</div>
+        </div>
+      `).join('<div style="width:1px;height:40px;background:#1E3050"></div>');
+    }
+
+    // Category filter tabs
+    const filterTabs = document.getElementById('archive-filter-tabs');
+    if (filterTabs && typeof CATEGORIES !== 'undefined') {
+      filterTabs.innerHTML += CATEGORIES.map(c =>
+        `<button class="category-tab" data-cat="${c.name}">${c.name}</button>`
+      ).join('');
+    }
+
+    let currentCat = 'all';
+    let currentSort = 'newest';
+
+    function renderGrid() {
+      const grid = document.getElementById('archive-grid');
+      const countEl = document.getElementById('archive-count');
+      let articles = currentCat === 'all'
+        ? [...ARTICLES]
+        : ARTICLES.filter(a => a.category === currentCat);
+
+      if (currentSort === 'newest') articles.sort((a,b) => new Date(b.dateISO)-new Date(a.dateISO));
+      if (currentSort === 'oldest') articles.sort((a,b) => new Date(a.dateISO)-new Date(b.dateISO));
+      if (currentSort === 'readtime') articles.sort((a,b) => b.readTime - a.readTime);
+
+      if (countEl) countEl.textContent = `Showing ${articles.length} article${articles.length !== 1 ? 's' : ''}${currentCat !== 'all' ? ' in ' + currentCat : ''}`;
+      if (grid) grid.innerHTML = articles.map(a => renderArticleCard(a, 'medium')).join('');
+
+      // Timeline
+      renderTimeline(articles);
+    }
+
+    function renderTimeline(articles) {
+      const tl = document.getElementById('timeline-view');
+      if (!tl) return;
+
+      const byMonth = {};
+      articles.forEach(a => {
+        const d = new Date(a.dateISO);
+        const key = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        if (!byMonth[key]) byMonth[key] = [];
+        byMonth[key].push(a);
+      });
+
+      tl.innerHTML = Object.entries(byMonth).map(([month, arts]) => `
+        <div style="display:flex;gap:32px;padding:24px 0;border-bottom:1px solid var(--border)">
+          <div style="width:140px;flex-shrink:0;padding-top:2px">
+            <div style="font-size:13px;font-weight:700;color:var(--text-secondary)">${month}</div>
+            <div style="font-size:11px;color:var(--text-muted)">${arts.length} article${arts.length!==1?'s':''}</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+            ${arts.map(a => `
+              <a href="article.html?slug=${a.slug}" style="display:flex;align-items:flex-start;gap:12px;text-decoration:none;padding:12px;border-radius:8px;border:1px solid var(--border);transition:all 0.2s;background:var(--bg-card)" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                <span style="font-size:24px;flex-shrink:0">${a.emoji}</span>
+                <div>
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+                    <span class="category-tag" data-cat="${a.category}">${a.category}</span>
+                    <span style="font-size:11px;color:var(--text-muted)">${a.readTime} min</span>
+                  </div>
+                  <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text-primary);line-height:1.3">${a.title}</div>
+                </div>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Initial render
+    renderGrid();
+
+    // Filter tab clicks
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('.category-tab');
+      if (!btn || !btn.closest('#archive-filter-tabs') && !btn.closest('#archive-filter-tabs ~ *')) return;
+      if (!btn.closest('#archive-filter-tabs')) return;
+      document.querySelectorAll('#archive-filter-tabs .category-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCat = btn.dataset.cat;
+      renderGrid();
+    });
+
+    // Sort change
+    const sortSelect = document.getElementById('sort-select');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', () => {
+        currentSort = sortSelect.value;
+        renderGrid();
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

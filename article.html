@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article — MERIDIAN</title>
+  <meta name="description" content="In-depth analytical article from MERIDIAN.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Reading progress bar -->
+<div class="reading-progress" id="reading-progress"></div>
+
+<!-- ── Search Overlay ───────────────────────────────────────── -->
+<div id="search-overlay" class="search-overlay">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="search-input" type="text" placeholder="Search articles…" autocomplete="off">
+      <button id="search-close" style="color:var(--text-muted);font-size:13px;font-weight:600">ESC</button>
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+
+<!-- ── Site Header ──────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__word">MERIDIAN</span>
+      <span class="nav-logo__tagline">Analysis · Insight · Clarity</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="category.html?cat=Technology">Technology</a>
+      <a href="category.html?cat=Economy">Economy</a>
+      <a href="category.html?cat=Geopolitics">Geopolitics</a>
+      <a href="category.html?cat=Science">Science</a>
+      <a href="category.html?cat=Culture">Culture</a>
+      <a href="category.html?cat=Environment">Environment</a>
+      <a href="archive.html">Archive</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn-search" id="search-open" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="btn-theme" onclick="toggleTheme()"><span id="theme-icon">🌙</span></button>
+      <a href="index.html#newsletter" class="btn-subscribe">Subscribe</a>
+      <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ── Article Hero ─────────────────────────────────────────── -->
+<div class="article-hero">
+  <div class="container article-hero__inner">
+
+    <!-- Breadcrumb -->
+    <nav style="font-size:12px;color:#3A5070;margin-bottom:24px;display:flex;align-items:center;gap:8px">
+      <a href="index.html" style="color:#3A5070;transition:color 0.2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#3A5070'">Home</a>
+      <span>›</span>
+      <span id="article-cat-breadcrumb" style="color:#3A5070"></span>
+      <span>›</span>
+      <span style="color:#5A7090" id="article-breadcrumb-title"></span>
+    </nav>
+
+    <div class="article-hero__cat" id="article-cat"></div>
+
+    <h1 class="article-hero__title" id="article-title">Loading article…</h1>
+    <p class="article-hero__subtitle" id="article-subtitle"></p>
+
+    <div class="article-hero__meta">
+      <div class="article-hero__author">
+        <div class="article-hero__avatar" id="article-avatar">?</div>
+        <div>
+          <div class="article-hero__author-name" id="article-author"></div>
+          <div class="article-hero__author-role" id="article-role"></div>
+        </div>
+      </div>
+      <div class="article-hero__divider"></div>
+      <div>
+        <div id="article-date" style="font-size:13px;color:#4A6080"></div>
+      </div>
+      <div class="article-hero__divider"></div>
+      <div id="article-readtime" style="font-size:13px;color:#4A6080"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Featured image / emoji placeholder -->
+<div style="background:var(--bg-secondary);border-bottom:1px solid var(--border)">
+  <div class="article-featured-image-placeholder" id="article-emoji">📖</div>
+</div>
+
+<!-- ── Article Layout ────────────────────────────────────────── -->
+<main>
+  <div class="container">
+    <div class="article-layout">
+
+      <!-- Article body -->
+      <div>
+        <div class="article-body" id="article-body">
+          <p style="color:var(--text-muted)">Loading content…</p>
+        </div>
+
+        <!-- Tags -->
+        <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px">Topics</div>
+          <div id="article-tags"></div>
+        </div>
+
+        <!-- Author card -->
+        <div style="margin-top:40px;padding:24px;background:var(--bg-secondary);border-radius:var(--radius-lg);border:1px solid var(--border)">
+          <div style="display:flex;gap:16px;align-items:flex-start">
+            <div id="author-card-avatar" style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:#fff;flex-shrink:0"></div>
+            <div>
+              <div style="font-size:16px;font-weight:700;margin-bottom:2px" id="author-card-name"></div>
+              <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px" id="author-card-role"></div>
+              <p style="font-size:13px;color:var(--text-secondary);line-height:1.6">
+                A contributor to MERIDIAN specializing in analytical coverage of complex global topics.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Article sidebar -->
+      <aside class="article-sidebar">
+
+        <!-- Share bar -->
+        <div class="share-bar">
+          <div class="share-bar__title">Share this article</div>
+          <div class="share-buttons">
+            <button class="share-btn" onclick="shareArticle('twitter')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.261 5.632L18.244 2.25zM17.083 19.77h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+              Share on X
+            </button>
+            <button class="share-btn" onclick="shareArticle('linkedin')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              Share on LinkedIn
+            </button>
+            <button class="share-btn" onclick="copyLink()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              Copy link
+            </button>
+          </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="sidebar-widget">
+          <div class="sidebar-widget__title">In this article</div>
+          <div id="toc-list" style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--text-secondary)">
+            <a href="#" style="color:var(--text-secondary);padding:4px 0;border-left:2px solid var(--border);padding-left:10px;transition:all 0.2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">The Inversion Nobody Predicted</a>
+            <a href="#" style="color:var(--text-secondary);padding:4px 0;border-left:2px solid var(--border);padding-left:10px;transition:all 0.2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">The 'Complementarity' Argument</a>
+            <a href="#" style="color:var(--text-secondary);padding:4px 0;border-left:2px solid var(--border);padding-left:10px;transition:all 0.2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">What the New Labor Market Rewards</a>
+            <a href="#" style="color:var(--text-secondary);padding:4px 0;border-left:2px solid var(--border);padding-left:10px;transition:all 0.2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">Policy Responses and Their Gaps</a>
+          </div>
+        </div>
+
+        <!-- Newsletter prompt -->
+        <div class="sidebar-widget" style="background:var(--bg-dark);border-color:var(--border-dark);text-align:center">
+          <div style="font-size:22px;margin-bottom:10px">📬</div>
+          <div style="font-size:14px;font-weight:700;color:#C8D8E8;margin-bottom:8px">Enjoyed this piece?</div>
+          <p style="font-size:12px;color:#4A6080;margin-bottom:16px;line-height:1.6">Get new analytical articles delivered directly to your inbox.</p>
+          <a href="index.html#newsletter" style="display:block;padding:10px;background:var(--accent);color:#fff;border-radius:8px;font-size:13px;font-weight:700;transition:background 0.2s" onmouseover="this.style.background='var(--accent-dark)'" onmouseout="this.style.background='var(--accent)'">Subscribe Free</a>
+        </div>
+
+      </aside>
+    </div>
+
+    <!-- Related Articles -->
+    <div style="padding:60px 0;border-top:1px solid var(--border)">
+      <div class="section-header">
+        <div class="section-title">Related Analysis</div>
+        <a href="archive.html" class="section-link">Browse archive →</a>
+      </div>
+      <div id="related-articles" style="display:flex;flex-direction:column;gap:16px"></div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── Footer ────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand__logo">MERIDIAN</div>
+        <div class="footer-brand__tagline">Analysis · Insight · Clarity</div>
+        <p class="footer-brand__desc">Independent analytical journalism on the forces shaping our world. Free to read, always.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__title">Topics</div>
+        <ul>
+          <li><a href="category.html?cat=Technology">Technology</a></li>
+          <li><a href="category.html?cat=Economy">Economy</a></li>
+          <li><a href="category.html?cat=Geopolitics">Geopolitics</a></li>
+          <li><a href="category.html?cat=Science">Science</a></li>
+          <li><a href="category.html?cat=Culture">Culture</a></li>
+          <li><a href="category.html?cat=Environment">Environment</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__title">Publication</div>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="archive.html">Archive</a></li>
+          <li><a href="index.html#newsletter">Newsletter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__title">Legal</div>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom__copy">© 2026 MERIDIAN. All rights reserved.</span>
+      <div class="footer-bottom__links">
+        <a href="index.html">Home</a>
+        <a href="archive.html">Archive</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/articles-data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  function shareArticle(platform) {
+    const url  = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(document.title);
+    const urls = {
+      twitter:  `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`
+    };
+    if (urls[platform]) window.open(urls[platform], '_blank', 'width=600,height=400');
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const btn = event.target.closest('.share-btn');
+      if (btn) { btn.textContent = '✓ Copied!'; setTimeout(() => location.reload(), 1500); }
+    });
+  }
+
+  // Populate author card after article loads
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      const params = new URLSearchParams(window.location.search);
+      const article = typeof getArticleBySlug === 'function' ? getArticleBySlug(params.get('slug')) : null;
+      if (!article) return;
+
+      const el = id => document.getElementById(id);
+      const av = el('author-card-avatar');
+      if (av) { av.textContent = article.author.initials; av.style.background = article.author.color; }
+      const n = el('author-card-name');  if (n) n.textContent = article.author.name;
+      const r = el('author-card-role');  if (r) r.textContent = article.author.role || '';
+
+      // Breadcrumb
+      const cb = el('article-cat-breadcrumb');
+      if (cb) { cb.textContent = article.category; cb.style.color = '#C9A035'; }
+      const bt = el('article-breadcrumb-title');
+      if (bt) bt.textContent = article.title.substring(0, 50) + '…';
+
+      // ToC from h2s in body
+      const toc = el('toc-list');
+      const body = el('article-body');
+      if (toc && body) {
+        const headings = body.querySelectorAll('h2');
+        if (headings.length) {
+          toc.innerHTML = Array.from(headings).map((h, i) => {
+            const id = 'section-' + i;
+            h.id = id;
+            return `<a href="#${id}" style="color:var(--text-secondary);padding:4px 0;border-left:2px solid var(--border);padding-left:10px;display:block;transition:all 0.2s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">${h.textContent}</a>`;
+          }).join('');
+        }
+      }
+    }, 100);
+  });
+</script>
+
+</body>
+</html>

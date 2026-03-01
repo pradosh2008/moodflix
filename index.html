@@ -1,109 +1,508 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Stop scrolling. Find your next movie based on your current vibe with MoodFlix.">
-    <meta property="og:title" content="MoodFlix | AI Cinematic Pulse">
-    <meta property="og:description" content="Instant movie matches for your mood. Powered by the 2026 AI Engine.">
-    <meta property="og:image" content="https://your-vercel-link.app/preview-image.jpg">
-    <title>MoodFlix | Live Cinematic Engine</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #050505; color: white; overflow-x: hidden; scroll-behavior: smooth; }
-        .netflix-red { color: #E50914; }
-        /* Scaled up Mood Cards */
-        .mood-card { border: 1px solid #222; transition: all 0.3s; background: #111; cursor: pointer; min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .mood-card:hover { transform: scale(1.05); border-color: #E50914; box-shadow: 0 10px 40px rgba(229, 9, 20, 0.5); }
-        .pulse-dot { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MERIDIAN — Where Analysis Meets Clarity</title>
+  <meta name="description" content="MERIDIAN is a premium analytical publication covering technology, economics, geopolitics, science, culture, and the environment. Rigorous analysis for curious minds.">
+  <meta property="og:title" content="MERIDIAN — Where Analysis Meets Clarity">
+  <meta property="og:description" content="Premium analytical journalism on the forces shaping our world.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0D1421">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="font-sans">
+<body>
 
-    <nav class="p-6 flex justify-between items-center fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
-        <h1 class="text-3xl font-black tracking-tighter netflix-red italic">MOODFLIX</h1>
-        <div class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full text-xs font-bold">
-            <span class="w-2 h-2 bg-red-500 rounded-full pulse-dot"></span>
-            <span id="user-count">4,218</span> LIVE STREAMS
-        </div>
+<!-- ── Search Overlay ───────────────────────────────────────── -->
+<div id="search-overlay" class="search-overlay" role="dialog" aria-label="Search">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="search-input" type="text" placeholder="Search articles, topics, authors…" autocomplete="off">
+      <button id="search-close" style="color:var(--text-muted);font-size:13px;font-weight:600">ESC</button>
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+
+<!-- ── Site Header ──────────────────────────────────────────── -->
+<header class="site-header" role="banner">
+  <div class="container nav-inner">
+
+    <a href="index.html" class="nav-logo" aria-label="MERIDIAN Home">
+      <span class="nav-logo__word">MERIDIAN</span>
+      <span class="nav-logo__tagline">Analysis · Insight · Clarity</span>
+    </a>
+
+    <nav class="nav-links" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="active">Home</a>
+      <a href="category.html?cat=Technology">Technology</a>
+      <a href="category.html?cat=Economy">Economy</a>
+      <a href="category.html?cat=Geopolitics">Geopolitics</a>
+      <a href="category.html?cat=Science">Science</a>
+      <a href="category.html?cat=Culture">Culture</a>
+      <a href="category.html?cat=Environment">Environment</a>
+      <a href="archive.html">Archive</a>
     </nav>
 
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-32 pb-20">
-        <h2 class="text-6xl md:text-9xl font-black mb-16 tracking-tighter uppercase">PICK YOUR <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-purple-600">PULSE.</span></h2>
-        
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 w-full max-w-7xl">
-            <div onclick="fetchMovie('Supernatural')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">😎</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Radiant</p></div>
-            <div onclick="fetchMovie('Revenge')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">🖤</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Vengeful</p></div>
-            <div onclick="fetchMovie('Adventure')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">🌋</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Heroic</p></div>
-            <div onclick="fetchMovie('Space')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">🌀</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Cosmic</p></div>
-            <div onclick="fetchMovie('Drama')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">🥀</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Healing</p></div>
-            <div onclick="fetchMovie('Mystery')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">❄️</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Isolated</p></div>
-            <div onclick="fetchMovie('Hacker')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">🧠</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Genius</p></div>
-            <div onclick="fetchMovie('Horror')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">👻</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Terrified</p></div>
-            <div onclick="fetchMovie('Heist')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">💰</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Wealthy</p></div>
-            <div onclick="fetchMovie('Survival')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">🦁</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Primal</p></div>
-            <div onclick="fetchMovie('Fantasy')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">☁️</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Ethereal</p></div>
-            <div onclick="fetchMovie('War')" class="mood-card p-8 rounded-2xl"><span class="text-5xl mb-4">🔥</span><p class="text-sm font-black uppercase tracking-widest text-gray-400">Furious</p></div>
-        </div>
-    </section>
+    <div class="nav-actions">
+      <button class="btn-search" id="search-open" aria-label="Open search" title="Search (⌘K)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="btn-theme" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <span id="theme-icon">🌙</span>
+      </button>
+      <a href="#newsletter" class="btn-subscribe">Subscribe</a>
+      <button class="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
 
-    <section id="discovery" class="hidden min-h-screen bg-[#0a0a0a] py-32 px-6 border-t border-white/5">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-center">
-            <div class="w-full md:w-1/2 aspect-[2/3] bg-neutral-900 rounded-3xl overflow-hidden shadow-2xl relative border border-white/10">
-                <img id="movie-poster" src="" alt="Poster" class="absolute inset-0 w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                <div class="absolute bottom-10 left-10">
-                    <h3 id="movie-name" class="text-6xl font-black italic uppercase leading-tight text-white"></h3>
-                </div>
+  </div>
+</header>
+
+<!-- ── Hero Section ─────────────────────────────────────────── -->
+<section class="hero" aria-label="Featured story">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+
+  <div class="container" style="width:100%">
+    <div class="hero-content">
+
+      <!-- Main featured article -->
+      <div class="hero-main animate-in">
+        <div class="hero-badge">Editor's Pick</div>
+        <h1 class="hero-title">
+          How Artificial Intelligence Is Quietly <em>Reshaping</em> Global Labor Markets
+        </h1>
+        <p class="hero-excerpt">
+          From white-collar automation to the rise of AI-proof skills, the employment landscape of 2026 looks nothing like economists predicted five years ago — and the adjustment mechanisms may be fundamentally mismatched.
+        </p>
+        <div class="hero-meta">
+          <div class="hero-author">
+            <div class="hero-author__avatar">SC</div>
+            <div>
+              <div class="hero-author__name">Sarah Chen</div>
+              <div class="hero-author__date">March 1, 2026</div>
             </div>
-            <div class="w-full md:w-1/2">
-                <p id="movie-year" class="text-red-500 font-bold uppercase tracking-[0.3em] mb-4 text-sm"></p>
-                <p id="movie-description" class="text-neutral-400 text-xl leading-relaxed mb-10"></p>
-                
-                <div class="flex flex-wrap gap-4">
-                    <a id="link-search" href="#" target="_blank" class="bg-white text-black px-10 py-4 rounded-xl font-black hover:bg-neutral-200 transition uppercase tracking-widest text-xs">Watch Online</a>
-                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="border border-white/20 px-10 py-4 rounded-xl font-black hover:bg-white/10 transition uppercase tracking-widest text-xs">New Vibe</button>
-                </div>
-            </div>
+          </div>
+          <span style="color:#1E3050">·</span>
+          <span style="color:#3A5070;font-size:13px">9 min read</span>
+          <span class="category-tag" data-cat="Technology" style="font-size:10px">Technology</span>
         </div>
-    </section>
+        <a href="article.html?slug=ai-reshaping-global-labor-markets" class="hero-read-btn">
+          Read the Analysis
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
 
-    <script>
-        const API_KEY = 'f82e33d3';
+      <!-- Sidebar trending list -->
+      <aside class="hero-sidebar">
+        <div class="hero-sidebar__title">Also Trending</div>
 
-        async function fetchMovie(keyword) {
-            const searchUrl = `https://www.omdbapi.com/?s=${keyword}&apikey=${API_KEY}&type=movie`;
-            try {
-                const searchResponse = await fetch(searchUrl);
-                const searchData = await searchResponse.json();
-                if (searchData.Response === "True") {
-                    const movies = searchData.Search;
-                    const randomChoice = movies[Math.floor(Math.random() * movies.length)];
-                    const detailUrl = `https://www.omdbapi.com/?i=${randomChoice.imdbID}&apikey=${API_KEY}&plot=full`;
-                    const detailResponse = await fetch(detailUrl);
-                    const movie = await detailResponse.json();
+        <div class="hero-mini-card" onclick="window.location='article.html?slug=dollar-dominance-twilight'">
+          <div class="hero-mini-card__num">01</div>
+          <div>
+            <div class="hero-mini-card__cat" style="color:#10B981">Economy</div>
+            <div class="hero-mini-card__title">The Dollar's Twilight: Is Reserve Currency Status Finally Under Threat?</div>
+          </div>
+        </div>
 
-                    document.getElementById('movie-name').innerText = movie.Title;
-                    document.getElementById('movie-description').innerText = movie.Plot.substring(0, 280) + "...";
-                    document.getElementById('movie-year').innerText = `Released: ${movie.Year} | ${movie.imdbRating} IMDB`;
-                    document.getElementById('movie-poster').src = movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/500x750?text=No+Poster";
-                    document.getElementById('link-search').href = `https://www.google.com/search?q=watch+${movie.Title.replace(/ /g, '+')}+online`;
+        <div class="hero-mini-card" onclick="window.location='article.html?slug=arctic-geopolitics-new-cold-war'">
+          <div class="hero-mini-card__num">02</div>
+          <div>
+            <div class="hero-mini-card__cat" style="color:#EC4899">Geopolitics</div>
+            <div class="hero-mini-card__title">The Arctic's Melting Ice Is Opening a New Theater for Great Power Competition</div>
+          </div>
+        </div>
 
-                    const discovery = document.getElementById('discovery');
-                    discovery.classList.remove('hidden');
-                    setTimeout(() => discovery.scrollIntoView({ behavior: 'smooth' }), 50);
-                }
-            } catch (error) { console.error("API Error:", error); }
-        }
+        <div class="hero-mini-card" onclick="window.location='article.html?slug=quantum-computing-cryptography-crisis'">
+          <div class="hero-mini-card__num">03</div>
+          <div>
+            <div class="hero-mini-card__cat" style="color:#3B82F6">Technology</div>
+            <div class="hero-mini-card__title">The Cryptography Crisis No One Is Talking About</div>
+          </div>
+        </div>
 
-        setInterval(() => {
-            const el = document.getElementById('user-count');
-            let count = parseInt(el.innerText.replace(',', ''));
-            count += Math.floor(Math.random() * 3) - 1;
-            el.innerText = count.toLocaleString();
-        }, 3000);
-    </script>
+        <div class="hero-mini-card" onclick="window.location='article.html?slug=longevity-research-inequality-access'">
+          <div class="hero-mini-card__num">04</div>
+          <div>
+            <div class="hero-mini-card__cat" style="color:#8B5CF6">Science</div>
+            <div class="hero-mini-card__title">The Longevity Revolution Is Coming. Who Gets to Benefit?</div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Breaking Ticker ──────────────────────────────────────── -->
+<div class="ticker-bar" aria-hidden="true">
+  <div class="ticker-label">Latest</div>
+  <div class="ticker-track" id="ticker-track">
+    <div class="ticker-item">South China Sea: New alliance dynamics shift the 2026 calculus</div>
+    <div class="ticker-item">CBDCs in 14 countries — what the first-year data reveals</div>
+    <div class="ticker-item">Vertical farming profitability milestone reached in Q1 2026</div>
+    <div class="ticker-item">Quantum computing timelines compress faster than post-quantum standards</div>
+    <div class="ticker-item">Democratic backsliding indices diverge — the methodology gap matters</div>
+    <div class="ticker-item">Streaming consolidation: three platforms now control 71% of global hours</div>
+    <div class="ticker-item">South China Sea: New alliance dynamics shift the 2026 calculus</div>
+    <div class="ticker-item">CBDCs in 14 countries — what the first-year data reveals</div>
+    <div class="ticker-item">Vertical farming profitability milestone reached in Q1 2026</div>
+    <div class="ticker-item">Quantum computing timelines compress faster than post-quantum standards</div>
+    <div class="ticker-item">Democratic backsliding indices diverge — the methodology gap matters</div>
+    <div class="ticker-item">Streaming consolidation: three platforms now control 71% of global hours</div>
+  </div>
+</div>
+
+<!-- ── Featured Articles Grid ───────────────────────────────── -->
+<main>
+<section class="home-main-section" style="padding-top:56px">
+  <div class="container">
+
+    <div class="section-header">
+      <div class="section-title">Featured Analysis</div>
+      <a href="archive.html" class="section-link">View all articles →</a>
+    </div>
+
+    <div class="featured-grid">
+
+      <!-- Card 1 — Large (spans 2 cols, 2 rows) -->
+      <article class="card card--large" onclick="window.location='article.html?slug=dollar-dominance-twilight'" style="cursor:pointer">
+        <div class="card__image-placeholder" style="aspect-ratio:4/3;font-size:80px">💵</div>
+        <div class="card__body">
+          <div class="card__meta">
+            <span class="category-tag" data-cat="Economy">Economy</span>
+            <span class="card__date">February 27, 2026</span>
+            <span class="card__read-time">· 12 min</span>
+          </div>
+          <h2 class="card__title" style="font-size:24px">The Dollar's Twilight: Is Reserve Currency Status Finally Under Threat?</h2>
+          <p class="card__excerpt">After decades of predictions that proved premature, a convergence of geopolitical realignments and digital currency infrastructure may be changing the calculus in ways even skeptics find hard to dismiss.</p>
+        </div>
+        <div class="card__footer">
+          <div class="card__author">
+            <div class="card__author-avatar" style="background:#10B981">MR</div>
+            <span class="card__author-name">Marcus Rivera</span>
+          </div>
+          <button class="card__save" title="Save article" onclick="event.stopPropagation();this.style.color='var(--accent)'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card card--medium" onclick="window.location='article.html?slug=arctic-geopolitics-new-cold-war'" style="cursor:pointer">
+        <div class="card__image-placeholder">🧊</div>
+        <div class="card__body">
+          <div class="card__meta">
+            <span class="category-tag" data-cat="Geopolitics">Geopolitics</span>
+            <span class="card__date">Feb 24, 2026</span>
+          </div>
+          <h3 class="card__title">The Arctic's Melting Ice Is Opening a New Theater for Great Power Competition</h3>
+          <p class="card__excerpt">Five nations with Arctic coastlines are racing to establish legal, military, and economic precedents in waters that were impassable a generation ago.</p>
+        </div>
+        <div class="card__footer">
+          <div class="card__author">
+            <div class="card__author-avatar" style="background:#EC4899">EV</div>
+            <span class="card__author-name">Elena Vasquez</span>
+          </div>
+          <button class="card__save" title="Save article" onclick="event.stopPropagation();this.style.color='var(--accent)'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card card--medium" onclick="window.location='article.html?slug=quantum-computing-cryptography-crisis'" style="cursor:pointer">
+        <div class="card__image-placeholder">🔐</div>
+        <div class="card__body">
+          <div class="card__meta">
+            <span class="category-tag" data-cat="Technology">Technology</span>
+            <span class="card__date">Feb 22, 2026</span>
+          </div>
+          <h3 class="card__title">The Cryptography Crisis No One Is Talking About</h3>
+          <p class="card__excerpt">Quantum computers capable of breaking RSA encryption may arrive sooner than governments and banks are prepared for. The timelines are collapsing.</p>
+        </div>
+        <div class="card__footer">
+          <div class="card__author">
+            <div class="card__author-avatar" style="background:#3B82F6">DP</div>
+            <span class="card__author-name">David Park</span>
+          </div>
+          <button class="card__save" title="Save article" onclick="event.stopPropagation();this.style.color='var(--accent)'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- ── Two-column layout: Articles + Sidebar ─── -->
+    <div class="home-two-col">
+
+      <!-- Left: Category-filtered articles -->
+      <div>
+        <div class="section-header">
+          <div class="section-title">Latest Thinking</div>
+        </div>
+
+        <!-- Category tabs -->
+        <div class="category-tabs" id="category-tabs">
+          <button class="category-tab active" data-cat="all">All Topics</button>
+          <button class="category-tab" data-cat="Technology">Technology</button>
+          <button class="category-tab" data-cat="Economy">Economy</button>
+          <button class="category-tab" data-cat="Geopolitics">Geopolitics</button>
+          <button class="category-tab" data-cat="Science">Science</button>
+          <button class="category-tab" data-cat="Culture">Culture</button>
+          <button class="category-tab" data-cat="Environment">Environment</button>
+          <button class="category-tab" data-cat="Politics">Politics</button>
+        </div>
+
+        <!-- Articles list -->
+        <div class="articles-list" id="articles-list">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div class="load-more-wrap">
+          <a href="archive.html" class="btn-load-more">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            View Full Archive
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Sidebar -->
+      <aside>
+
+        <!-- Most Read -->
+        <div class="sidebar-widget">
+          <div class="sidebar-widget__title">Most Read This Week</div>
+          <div id="most-read-list">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Category Explorer -->
+        <div class="sidebar-widget">
+          <div class="sidebar-widget__title">Explore by Topic</div>
+          <div style="display:flex;flex-direction:column;gap:8px" id="category-explorer">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- About Meridian -->
+        <div class="sidebar-widget" style="background:var(--bg-dark);border-color:var(--border-dark)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#3A5070;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #1E3050">About MERIDIAN</div>
+          <p style="font-size:13px;color:#4A6080;line-height:1.65;margin-bottom:16px">
+            MERIDIAN publishes rigorous analytical pieces on the forces shaping our world — from geopolitics and economics to technology and culture.
+          </p>
+          <a href="about.html" style="font-size:12px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:4px">
+            Our mission →
+          </a>
+        </div>
+
+      </aside>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Category Spotlight (dark section) ────────────────────── -->
+<section class="category-spotlight">
+  <div class="container">
+    <div class="section-header" style="border-bottom-color:#1E3050">
+      <div class="section-title" style="color:#7A90AA">Deep Dives</div>
+      <a href="archive.html" class="section-link" style="color:var(--accent-light)">All analysis →</a>
+    </div>
+
+    <div class="spotlight-grid">
+
+      <article class="spotlight-card" onclick="window.location='article.html?slug=longevity-research-inequality-access'">
+        <div class="spotlight-card__image">🧬</div>
+        <div class="spotlight-card__body">
+          <div class="spotlight-card__cat" style="color:#8B5CF6">Science</div>
+          <h3 class="spotlight-card__title">The Longevity Revolution Is Coming. Who Gets to Benefit?</h3>
+          <p class="spotlight-card__excerpt">Breakthroughs in aging biology are reaching clinical trials. The harder question is whether access will mirror every other medical innovation.</p>
+          <div class="spotlight-card__footer">
+            <span class="spotlight-card__date">Feb 15, 2026</span>
+            <span class="spotlight-card__time">13 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="spotlight-card" onclick="window.location='article.html?slug=democratic-backsliding-measurement-problem'">
+        <div class="spotlight-card__image">🗳️</div>
+        <div class="spotlight-card__body">
+          <div class="spotlight-card__cat" style="color:#EF4444">Politics</div>
+          <h3 class="spotlight-card__title">Democratic Backsliding Has a Measurement Problem</h3>
+          <p class="spotlight-card__excerpt">Established indices disagree sharply on which countries are losing democratic quality — and the methodology gap matters for how we respond.</p>
+          <div class="spotlight-card__footer">
+            <span class="spotlight-card__date">Feb 18, 2026</span>
+            <span class="spotlight-card__time">11 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="spotlight-card" onclick="window.location='article.html?slug=urban-food-systems-vertical-farming'">
+        <div class="spotlight-card__image">🌿</div>
+        <div class="spotlight-card__body">
+          <div class="spotlight-card__cat" style="color:#06B6D4">Environment</div>
+          <h3 class="spotlight-card__title">Vertical Farms Are Finally Profitable — And They're Changing Urban Planning</h3>
+          <p class="spotlight-card__excerpt">After years of hype and failed ventures, a new generation of indoor agriculture companies has cracked the economics.</p>
+          <div class="spotlight-card__footer">
+            <span class="spotlight-card__date">Feb 20, 2026</span>
+            <span class="spotlight-card__time">7 min read</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats Bar ─────────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-item__num">12</div>
+        <div class="stat-item__label">Articles Published</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__num">7</div>
+        <div class="stat-item__label">Topic Categories</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__num">6</div>
+        <div class="stat-item__label">Expert Contributors</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-item__num">∞</div>
+        <div class="stat-item__label">Growing Archive</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Newsletter ────────────────────────────────────────────── -->
+<section class="newsletter-section" id="newsletter">
+  <div class="container">
+    <div class="newsletter-eyebrow">Stay Informed</div>
+    <h2 class="newsletter-title">Analysis Worth Reading,<br>Delivered to You</h2>
+    <p class="newsletter-subtitle">
+      Join readers who value depth over noise. New pieces published regularly — no filler, no fluff.
+    </p>
+    <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+      <input type="email" placeholder="your@email.com" required aria-label="Email address">
+      <button type="submit">Subscribe Free</button>
+    </form>
+    <p class="newsletter-note">Free forever. No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ── Footer ────────────────────────────────────────────────── -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+
+      <div>
+        <div class="footer-brand__logo">MERIDIAN</div>
+        <div class="footer-brand__tagline">Analysis · Insight · Clarity</div>
+        <p class="footer-brand__desc">
+          MERIDIAN is an independent analytical publication dedicated to rigorous, accessible analysis of the ideas and events shaping our world. Free to read, always.
+        </p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter/X" title="Follow on X">𝕏</a>
+          <a href="#" aria-label="LinkedIn" title="Follow on LinkedIn">in</a>
+          <a href="#" aria-label="RSS Feed" title="RSS Feed">⊕</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col__title">Topics</div>
+        <ul>
+          <li><a href="category.html?cat=Technology">Technology</a></li>
+          <li><a href="category.html?cat=Economy">Economy</a></li>
+          <li><a href="category.html?cat=Geopolitics">Geopolitics</a></li>
+          <li><a href="category.html?cat=Science">Science</a></li>
+          <li><a href="category.html?cat=Culture">Culture</a></li>
+          <li><a href="category.html?cat=Environment">Environment</a></li>
+          <li><a href="category.html?cat=Politics">Politics</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col__title">Publication</div>
+        <ul>
+          <li><a href="about.html">About MERIDIAN</a></li>
+          <li><a href="archive.html">Article Archive</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="about.html#contributors">Contributors</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col__title">Legal</div>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Editorial Standards</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-bottom__copy">© 2026 MERIDIAN. All rights reserved. Free to read.</span>
+      <div class="footer-bottom__links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/articles-data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Render articles list
+  document.addEventListener('DOMContentLoaded', () => {
+    const list = document.getElementById('articles-list');
+    if (list && typeof getLatestArticles === 'function') {
+      list.innerHTML = getLatestArticles(8).map(a => renderHorizontalCard(a)).join('');
+    }
+
+    // Most read sidebar
+    const mostRead = document.getElementById('most-read-list');
+    if (mostRead && typeof ARTICLES !== 'undefined') {
+      mostRead.innerHTML = ARTICLES.slice(0, 5).map((a, i) => renderRankedCard(a, i + 1)).join('');
+    }
+
+    // Category explorer sidebar
+    const catExplorer = document.getElementById('category-explorer');
+    if (catExplorer && typeof CATEGORIES !== 'undefined') {
+      catExplorer.innerHTML = CATEGORIES.map(c => `
+        <a href="category.html?cat=${c.name}"
+           style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text-secondary);transition:all 0.2s;text-decoration:none"
+           onmouseover="this.style.borderColor='${c.color}';this.style.color='${c.color}'"
+           onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">
+          <span>${c.name}</span>
+          <span style="font-size:11px;color:var(--text-light)">${ARTICLES.filter(a=>a.category===c.name).length} articles</span>
+        </a>
+      `).join('');
+    }
+
+    // Category tab filtering
+    initCategoryTabs('category-tabs', 'articles-list');
+  });
+</script>
+
 </body>
 </html>

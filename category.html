@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category — MERIDIAN</title>
+  <meta name="description" content="Browse articles by category on MERIDIAN.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ── Search Overlay ───────────────────────────────────────── -->
+<div id="search-overlay" class="search-overlay">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="search-input" type="text" placeholder="Search articles…" autocomplete="off">
+      <button id="search-close" style="color:var(--text-muted);font-size:13px;font-weight:600">ESC</button>
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+
+<!-- ── Site Header ──────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo__word">MERIDIAN</span>
+      <span class="nav-logo__tagline">Analysis · Insight · Clarity</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="category.html?cat=Technology">Technology</a>
+      <a href="category.html?cat=Economy">Economy</a>
+      <a href="category.html?cat=Geopolitics">Geopolitics</a>
+      <a href="category.html?cat=Science">Science</a>
+      <a href="category.html?cat=Culture">Culture</a>
+      <a href="category.html?cat=Environment">Environment</a>
+      <a href="archive.html">Archive</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn-search" id="search-open"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+      <button class="btn-theme" onclick="toggleTheme()"><span id="theme-icon">🌙</span></button>
+      <a href="index.html#newsletter" class="btn-subscribe">Subscribe</a>
+      <button class="nav-hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ── Category Hero ────────────────────────────────────────── -->
+<div class="cat-hero" id="cat-hero-section">
+  <div class="container">
+    <div class="cat-hero__eyebrow">Topic Coverage</div>
+    <h1 class="cat-hero__title" id="cat-name">Category</h1>
+    <p class="cat-hero__desc" id="cat-desc">Analytical articles on this topic.</p>
+
+    <!-- Category switcher pills -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:28px" id="cat-switcher">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ── Category Articles ─────────────────────────────────────── -->
+<main>
+  <div class="container" style="padding-top:48px;padding-bottom:80px">
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px">
+      <div style="font-size:13px;color:var(--text-muted)" id="cat-count">Loading…</div>
+      <div style="font-size:12px;color:var(--text-muted)">Sorted by: Most Recent</div>
+    </div>
+
+    <div class="archive-grid" id="cat-grid">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Empty state -->
+    <div id="cat-empty" style="display:none;text-align:center;padding:80px 0">
+      <div style="font-size:48px;margin-bottom:16px">🔍</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:24px;margin-bottom:8px">More articles coming soon</h3>
+      <p style="color:var(--text-muted);font-size:15px">We're working on new analysis in this category.</p>
+      <a href="index.html#newsletter" style="display:inline-block;margin-top:20px;padding:12px 24px;background:var(--accent);color:#fff;border-radius:8px;font-weight:600;font-size:14px">Get notified</a>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── Newsletter ────────────────────────────────────────────── -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-eyebrow">Stay Informed</div>
+    <h2 class="newsletter-title">Never Miss an Analysis</h2>
+    <p class="newsletter-subtitle">New pieces published regularly. Subscribe and we'll send them directly to you.</p>
+    <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+      <input type="email" placeholder="your@email.com" required>
+      <button type="submit">Subscribe Free</button>
+    </form>
+    <p class="newsletter-note">Free forever. No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand__logo">MERIDIAN</div>
+        <div class="footer-brand__tagline">Analysis · Insight · Clarity</div>
+        <p class="footer-brand__desc">Independent analytical journalism. Free to read, always.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__title">Topics</div>
+        <ul>
+          <li><a href="category.html?cat=Technology">Technology</a></li>
+          <li><a href="category.html?cat=Economy">Economy</a></li>
+          <li><a href="category.html?cat=Geopolitics">Geopolitics</a></li>
+          <li><a href="category.html?cat=Science">Science</a></li>
+          <li><a href="category.html?cat=Culture">Culture</a></li>
+          <li><a href="category.html?cat=Environment">Environment</a></li>
+          <li><a href="category.html?cat=Politics">Politics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__title">Publication</div>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="archive.html">Archive</a></li>
+          <li><a href="index.html#newsletter">Newsletter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__title">Legal</div>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom__copy">© 2026 MERIDIAN. All rights reserved.</span>
+      <div class="footer-bottom__links">
+        <a href="index.html">Home</a>
+        <a href="archive.html">Archive</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/articles-data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get('cat') || 'Technology';
+
+    // Category hero color
+    const hero = document.getElementById('cat-hero-section');
+    if (hero) hero.setAttribute('data-cat', cat);
+
+    // Category switcher
+    const switcher = document.getElementById('cat-switcher');
+    if (switcher && typeof CATEGORIES !== 'undefined') {
+      switcher.innerHTML = CATEGORIES.map(c => {
+        const isActive = c.name === cat;
+        return `<a href="category.html?cat=${c.name}" style="padding:7px 16px;border-radius:100px;font-size:12px;font-weight:600;border:1.5px solid ${isActive ? c.color : 'rgba(255,255,255,0.15)'};color:${isActive ? '#fff' : 'rgba(255,255,255,0.5)'};background:${isActive ? c.color + '33' : 'transparent'};transition:all 0.2s;text-decoration:none">${c.name}</a>`;
+      }).join('');
+    }
+
+    // Load articles
+    const grid = document.getElementById('cat-grid');
+    const countEl = document.getElementById('cat-count');
+    if (grid && typeof getArticlesByCategory === 'function') {
+      const articles = getArticlesByCategory(cat);
+
+      if (countEl) countEl.textContent = `${articles.length} article${articles.length !== 1 ? 's' : ''} in ${cat}`;
+
+      if (articles.length === 0) {
+        grid.style.display = 'none';
+        document.getElementById('cat-empty').style.display = 'block';
+      } else {
+        grid.innerHTML = articles.map(a => renderArticleCard(a, 'medium')).join('');
+      }
+    }
+
+    // Set page title and meta
+    document.title = cat + ' — MERIDIAN';
+    const meta = typeof getCategoryMeta === 'function' ? getCategoryMeta(cat) : null;
+
+    const nameEl = document.getElementById('cat-name');
+    if (nameEl) nameEl.textContent = cat;
+
+    const descEl = document.getElementById('cat-desc');
+    if (descEl && meta) descEl.textContent = meta.desc;
+
+    // Mark nav active
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      if (a.href.includes('cat=' + cat)) a.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
