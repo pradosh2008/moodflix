@@ -3,55 +3,225 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MERIDIAN — Where Analysis Meets Clarity</title>
-  <meta name="description" content="MERIDIAN is a premium analytical publication covering technology, economics, geopolitics, science, culture, and the environment. Rigorous analysis for curious minds.">
-  <meta property="og:title" content="MERIDIAN — Where Analysis Meets Clarity">
-  <meta property="og:description" content="Premium analytical journalism on the forces shaping our world.">
+  <title>HARDFACTS — Truth Without Filter</title>
+  <meta name="description" content="HARDFACTS publishes unflinching investigative analysis on geopolitics, power, and the stories the mainstream won't tell.">
+  <meta property="og:title" content="HARDFACTS — Truth Without Filter">
+  <meta property="og:description" content="Unflinching investigative analysis on geopolitics and power.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#0D1421">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── HARDFACTS overrides ── */
+    .nav-logo__word {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+    }
+    .nav-logo__tagline {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── Clean hero — full bleed, centered ── */
+    .hf-hero {
+      background: var(--bg-dark);
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hf-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,160,53,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hf-hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,160,53,0.12);
+      border: 1px solid rgba(201,160,53,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 32px;
+    }
+    .hf-hero__eyebrow span.dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .hf-hero__cat {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #EC4899;
+      margin-bottom: 20px;
+    }
+    .hf-hero__title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(32px, 5vw, 60px);
+      font-weight: 800;
+      line-height: 1.15;
+      color: #EEF2F7;
+      max-width: 820px;
+      margin: 0 auto 24px;
+    }
+    .hf-hero__title em {
+      font-style: italic;
+      color: var(--accent-light);
+    }
+    .hf-hero__excerpt {
+      font-size: clamp(15px, 2vw, 18px);
+      color: #7A90AA;
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+    .hf-hero__meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .hf-hero__author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hf-hero__avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: #EC4899;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; color: #fff;
+    }
+    .hf-hero__author-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #8A9AB0;
+    }
+    .hf-hero__author-date {
+      font-size: 12px;
+      color: #4A6080;
+    }
+    .hf-hero__divider {
+      width: 1px; height: 28px;
+      background: #1E3050;
+    }
+    .hf-hero__pill {
+      font-size: 12px;
+      color: #4A6080;
+    }
+    .hf-read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 16px 36px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(201,160,53,0.3);
+    }
+    .hf-read-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,160,53,0.4);
+    }
+    .hf-scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: #2A4060;
+      letter-spacing: 0.1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .hf-scroll-hint svg {
+      animation: bounce 1.8s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+
+    /* ── About strip ── */
+    .hf-about-strip {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .hf-about-strip h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .hf-about-strip p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+  </style>
 </head>
 <body>
-
-<!-- ── Search Overlay ───────────────────────────────────────── -->
-<div id="search-overlay" class="search-overlay" role="dialog" aria-label="Search">
-  <div class="search-box">
-    <div class="search-input-wrap">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="search-input" type="text" placeholder="Search articles, topics, authors…" autocomplete="off">
-      <button id="search-close" style="color:var(--text-muted);font-size:13px;font-weight:600">ESC</button>
-    </div>
-    <div id="search-results" class="search-results"></div>
-  </div>
-</div>
 
 <!-- ── Site Header ──────────────────────────────────────────── -->
 <header class="site-header" role="banner">
   <div class="container nav-inner">
 
-    <a href="index.html" class="nav-logo" aria-label="MERIDIAN Home">
-      <span class="nav-logo__word">MERIDIAN</span>
-      <span class="nav-logo__tagline">Analysis · Insight · Clarity</span>
+    <a href="index.html" class="nav-logo" aria-label="HARDFACTS Home">
+      <span class="nav-logo__word">HARDFACTS</span>
+      <span class="nav-logo__tagline">Truth Without Filter</span>
     </a>
 
     <nav class="nav-links" role="navigation" aria-label="Main navigation">
       <a href="index.html" class="active">Home</a>
-      <a href="category.html?cat=Technology">Technology</a>
-      <a href="category.html?cat=Economy">Economy</a>
-      <a href="category.html?cat=Geopolitics">Geopolitics</a>
-      <a href="category.html?cat=Science">Science</a>
-      <a href="category.html?cat=Culture">Culture</a>
-      <a href="category.html?cat=Environment">Environment</a>
-      <a href="archive.html">Archive</a>
+      <a href="article.html?slug=usa-exploitation-iraq">The Iraq Report</a>
     </nav>
 
     <div class="nav-actions">
-      <button class="btn-search" id="search-open" aria-label="Open search" title="Search (⌘K)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      </button>
       <button class="btn-theme" onclick="toggleTheme()" aria-label="Toggle dark mode">
         <span id="theme-icon">🌙</span>
       </button>
@@ -64,346 +234,74 @@
   </div>
 </header>
 
-<!-- ── Hero Section ─────────────────────────────────────────── -->
-<section class="hero" aria-label="Featured story">
-  <div class="hero-bg"></div>
-  <div class="hero-pattern"></div>
+<!-- ── Hero ─────────────────────────────────────────────────── -->
+<section class="hf-hero" aria-label="Featured article">
 
-  <div class="container" style="width:100%">
-    <div class="hero-content">
-
-      <!-- Main featured article -->
-      <div class="hero-main animate-in">
-        <div class="hero-badge">Editor's Pick</div>
-        <h1 class="hero-title">
-          How Artificial Intelligence Is Quietly <em>Reshaping</em> Global Labor Markets
-        </h1>
-        <p class="hero-excerpt">
-          From white-collar automation to the rise of AI-proof skills, the employment landscape of 2026 looks nothing like economists predicted five years ago — and the adjustment mechanisms may be fundamentally mismatched.
-        </p>
-        <div class="hero-meta">
-          <div class="hero-author">
-            <div class="hero-author__avatar">SC</div>
-            <div>
-              <div class="hero-author__name">Sarah Chen</div>
-              <div class="hero-author__date">March 1, 2026</div>
-            </div>
-          </div>
-          <span style="color:#1E3050">·</span>
-          <span style="color:#3A5070;font-size:13px">9 min read</span>
-          <span class="category-tag" data-cat="Technology" style="font-size:10px">Technology</span>
-        </div>
-        <a href="article.html?slug=ai-reshaping-global-labor-markets" class="hero-read-btn">
-          Read the Analysis
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-
-      <!-- Sidebar trending list -->
-      <aside class="hero-sidebar">
-        <div class="hero-sidebar__title">Also Trending</div>
-
-        <div class="hero-mini-card" onclick="window.location='article.html?slug=dollar-dominance-twilight'">
-          <div class="hero-mini-card__num">01</div>
-          <div>
-            <div class="hero-mini-card__cat" style="color:#10B981">Economy</div>
-            <div class="hero-mini-card__title">The Dollar's Twilight: Is Reserve Currency Status Finally Under Threat?</div>
-          </div>
-        </div>
-
-        <div class="hero-mini-card" onclick="window.location='article.html?slug=arctic-geopolitics-new-cold-war'">
-          <div class="hero-mini-card__num">02</div>
-          <div>
-            <div class="hero-mini-card__cat" style="color:#EC4899">Geopolitics</div>
-            <div class="hero-mini-card__title">The Arctic's Melting Ice Is Opening a New Theater for Great Power Competition</div>
-          </div>
-        </div>
-
-        <div class="hero-mini-card" onclick="window.location='article.html?slug=quantum-computing-cryptography-crisis'">
-          <div class="hero-mini-card__num">03</div>
-          <div>
-            <div class="hero-mini-card__cat" style="color:#3B82F6">Technology</div>
-            <div class="hero-mini-card__title">The Cryptography Crisis No One Is Talking About</div>
-          </div>
-        </div>
-
-        <div class="hero-mini-card" onclick="window.location='article.html?slug=longevity-research-inequality-access'">
-          <div class="hero-mini-card__num">04</div>
-          <div>
-            <div class="hero-mini-card__cat" style="color:#8B5CF6">Science</div>
-            <div class="hero-mini-card__title">The Longevity Revolution Is Coming. Who Gets to Benefit?</div>
-          </div>
-        </div>
-      </aside>
-
-    </div>
+  <div class="hf-hero__eyebrow">
+    <span class="dot"></span>
+    First Article — Now Live
   </div>
-</section>
 
-<!-- ── Breaking Ticker ──────────────────────────────────────── -->
-<div class="ticker-bar" aria-hidden="true">
-  <div class="ticker-label">Latest</div>
-  <div class="ticker-track" id="ticker-track">
-    <div class="ticker-item">South China Sea: New alliance dynamics shift the 2026 calculus</div>
-    <div class="ticker-item">CBDCs in 14 countries — what the first-year data reveals</div>
-    <div class="ticker-item">Vertical farming profitability milestone reached in Q1 2026</div>
-    <div class="ticker-item">Quantum computing timelines compress faster than post-quantum standards</div>
-    <div class="ticker-item">Democratic backsliding indices diverge — the methodology gap matters</div>
-    <div class="ticker-item">Streaming consolidation: three platforms now control 71% of global hours</div>
-    <div class="ticker-item">South China Sea: New alliance dynamics shift the 2026 calculus</div>
-    <div class="ticker-item">CBDCs in 14 countries — what the first-year data reveals</div>
-    <div class="ticker-item">Vertical farming profitability milestone reached in Q1 2026</div>
-    <div class="ticker-item">Quantum computing timelines compress faster than post-quantum standards</div>
-    <div class="ticker-item">Democratic backsliding indices diverge — the methodology gap matters</div>
-    <div class="ticker-item">Streaming consolidation: three platforms now control 71% of global hours</div>
-  </div>
-</div>
+  <div class="hf-hero__cat">Geopolitics</div>
 
-<!-- ── Featured Articles Grid ───────────────────────────────── -->
-<main>
-<section class="home-main-section" style="padding-top:56px">
-  <div class="container">
+  <h1 class="hf-hero__title">
+    Oil, Power, and Deception:<br>
+    How the <em>USA Has Exploited Iraq</em> Since 2003
+  </h1>
 
-    <div class="section-header">
-      <div class="section-title">Featured Analysis</div>
-      <a href="archive.html" class="section-link">View all articles →</a>
-    </div>
+  <p class="hf-hero__excerpt">
+    Two decades after an invasion justified by weapons that never existed, Iraq's oil flows outward while millions remain in poverty. A hard look at what really happened — and what continues today.
+  </p>
 
-    <div class="featured-grid">
-
-      <!-- Card 1 — Large (spans 2 cols, 2 rows) -->
-      <article class="card card--large" onclick="window.location='article.html?slug=dollar-dominance-twilight'" style="cursor:pointer">
-        <div class="card__image-placeholder" style="aspect-ratio:4/3;font-size:80px">💵</div>
-        <div class="card__body">
-          <div class="card__meta">
-            <span class="category-tag" data-cat="Economy">Economy</span>
-            <span class="card__date">February 27, 2026</span>
-            <span class="card__read-time">· 12 min</span>
-          </div>
-          <h2 class="card__title" style="font-size:24px">The Dollar's Twilight: Is Reserve Currency Status Finally Under Threat?</h2>
-          <p class="card__excerpt">After decades of predictions that proved premature, a convergence of geopolitical realignments and digital currency infrastructure may be changing the calculus in ways even skeptics find hard to dismiss.</p>
-        </div>
-        <div class="card__footer">
-          <div class="card__author">
-            <div class="card__author-avatar" style="background:#10B981">MR</div>
-            <span class="card__author-name">Marcus Rivera</span>
-          </div>
-          <button class="card__save" title="Save article" onclick="event.stopPropagation();this.style.color='var(--accent)'">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
-          </button>
-        </div>
-      </article>
-
-      <!-- Card 2 -->
-      <article class="card card--medium" onclick="window.location='article.html?slug=arctic-geopolitics-new-cold-war'" style="cursor:pointer">
-        <div class="card__image-placeholder">🧊</div>
-        <div class="card__body">
-          <div class="card__meta">
-            <span class="category-tag" data-cat="Geopolitics">Geopolitics</span>
-            <span class="card__date">Feb 24, 2026</span>
-          </div>
-          <h3 class="card__title">The Arctic's Melting Ice Is Opening a New Theater for Great Power Competition</h3>
-          <p class="card__excerpt">Five nations with Arctic coastlines are racing to establish legal, military, and economic precedents in waters that were impassable a generation ago.</p>
-        </div>
-        <div class="card__footer">
-          <div class="card__author">
-            <div class="card__author-avatar" style="background:#EC4899">EV</div>
-            <span class="card__author-name">Elena Vasquez</span>
-          </div>
-          <button class="card__save" title="Save article" onclick="event.stopPropagation();this.style.color='var(--accent)'">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
-          </button>
-        </div>
-      </article>
-
-      <!-- Card 3 -->
-      <article class="card card--medium" onclick="window.location='article.html?slug=quantum-computing-cryptography-crisis'" style="cursor:pointer">
-        <div class="card__image-placeholder">🔐</div>
-        <div class="card__body">
-          <div class="card__meta">
-            <span class="category-tag" data-cat="Technology">Technology</span>
-            <span class="card__date">Feb 22, 2026</span>
-          </div>
-          <h3 class="card__title">The Cryptography Crisis No One Is Talking About</h3>
-          <p class="card__excerpt">Quantum computers capable of breaking RSA encryption may arrive sooner than governments and banks are prepared for. The timelines are collapsing.</p>
-        </div>
-        <div class="card__footer">
-          <div class="card__author">
-            <div class="card__author-avatar" style="background:#3B82F6">DP</div>
-            <span class="card__author-name">David Park</span>
-          </div>
-          <button class="card__save" title="Save article" onclick="event.stopPropagation();this.style.color='var(--accent)'">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
-          </button>
-        </div>
-      </article>
-
-    </div>
-
-    <!-- ── Two-column layout: Articles + Sidebar ─── -->
-    <div class="home-two-col">
-
-      <!-- Left: Category-filtered articles -->
+  <div class="hf-hero__meta">
+    <div class="hf-hero__author">
+      <div class="hf-hero__avatar">JH</div>
       <div>
-        <div class="section-header">
-          <div class="section-title">Latest Thinking</div>
-        </div>
-
-        <!-- Category tabs -->
-        <div class="category-tabs" id="category-tabs">
-          <button class="category-tab active" data-cat="all">All Topics</button>
-          <button class="category-tab" data-cat="Technology">Technology</button>
-          <button class="category-tab" data-cat="Economy">Economy</button>
-          <button class="category-tab" data-cat="Geopolitics">Geopolitics</button>
-          <button class="category-tab" data-cat="Science">Science</button>
-          <button class="category-tab" data-cat="Culture">Culture</button>
-          <button class="category-tab" data-cat="Environment">Environment</button>
-          <button class="category-tab" data-cat="Politics">Politics</button>
-        </div>
-
-        <!-- Articles list -->
-        <div class="articles-list" id="articles-list">
-          <!-- Rendered by JS -->
-        </div>
-
-        <div class="load-more-wrap">
-          <a href="archive.html" class="btn-load-more">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-            View Full Archive
-          </a>
-        </div>
+        <div class="hf-hero__author-name">James Harford</div>
+        <div class="hf-hero__author-date">March 1, 2026</div>
       </div>
-
-      <!-- Right: Sidebar -->
-      <aside>
-
-        <!-- Most Read -->
-        <div class="sidebar-widget">
-          <div class="sidebar-widget__title">Most Read This Week</div>
-          <div id="most-read-list">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-
-        <!-- Category Explorer -->
-        <div class="sidebar-widget">
-          <div class="sidebar-widget__title">Explore by Topic</div>
-          <div style="display:flex;flex-direction:column;gap:8px" id="category-explorer">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-
-        <!-- About Meridian -->
-        <div class="sidebar-widget" style="background:var(--bg-dark);border-color:var(--border-dark)">
-          <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#3A5070;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #1E3050">About MERIDIAN</div>
-          <p style="font-size:13px;color:#4A6080;line-height:1.65;margin-bottom:16px">
-            MERIDIAN publishes rigorous analytical pieces on the forces shaping our world — from geopolitics and economics to technology and culture.
-          </p>
-          <a href="about.html" style="font-size:12px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:4px">
-            Our mission →
-          </a>
-        </div>
-
-      </aside>
     </div>
-
+    <div class="hf-hero__divider"></div>
+    <span class="hf-hero__pill">15 min read</span>
+    <div class="hf-hero__divider"></div>
+    <span class="hf-hero__pill">Investigative Report</span>
   </div>
+
+  <a href="article.html?slug=usa-exploitation-iraq" class="hf-read-btn">
+    Read the Report
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+
+  <div class="hf-scroll-hint">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+
 </section>
 
-<!-- ── Category Spotlight (dark section) ────────────────────── -->
-<section class="category-spotlight">
-  <div class="container">
-    <div class="section-header" style="border-bottom-color:#1E3050">
-      <div class="section-title" style="color:#7A90AA">Deep Dives</div>
-      <a href="archive.html" class="section-link" style="color:var(--accent-light)">All analysis →</a>
-    </div>
-
-    <div class="spotlight-grid">
-
-      <article class="spotlight-card" onclick="window.location='article.html?slug=longevity-research-inequality-access'">
-        <div class="spotlight-card__image">🧬</div>
-        <div class="spotlight-card__body">
-          <div class="spotlight-card__cat" style="color:#8B5CF6">Science</div>
-          <h3 class="spotlight-card__title">The Longevity Revolution Is Coming. Who Gets to Benefit?</h3>
-          <p class="spotlight-card__excerpt">Breakthroughs in aging biology are reaching clinical trials. The harder question is whether access will mirror every other medical innovation.</p>
-          <div class="spotlight-card__footer">
-            <span class="spotlight-card__date">Feb 15, 2026</span>
-            <span class="spotlight-card__time">13 min read</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="spotlight-card" onclick="window.location='article.html?slug=democratic-backsliding-measurement-problem'">
-        <div class="spotlight-card__image">🗳️</div>
-        <div class="spotlight-card__body">
-          <div class="spotlight-card__cat" style="color:#EF4444">Politics</div>
-          <h3 class="spotlight-card__title">Democratic Backsliding Has a Measurement Problem</h3>
-          <p class="spotlight-card__excerpt">Established indices disagree sharply on which countries are losing democratic quality — and the methodology gap matters for how we respond.</p>
-          <div class="spotlight-card__footer">
-            <span class="spotlight-card__date">Feb 18, 2026</span>
-            <span class="spotlight-card__time">11 min read</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="spotlight-card" onclick="window.location='article.html?slug=urban-food-systems-vertical-farming'">
-        <div class="spotlight-card__image">🌿</div>
-        <div class="spotlight-card__body">
-          <div class="spotlight-card__cat" style="color:#06B6D4">Environment</div>
-          <h3 class="spotlight-card__title">Vertical Farms Are Finally Profitable — And They're Changing Urban Planning</h3>
-          <p class="spotlight-card__excerpt">After years of hype and failed ventures, a new generation of indoor agriculture companies has cracked the economics.</p>
-          <div class="spotlight-card__footer">
-            <span class="spotlight-card__date">Feb 20, 2026</span>
-            <span class="spotlight-card__time">7 min read</span>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── Stats Bar ─────────────────────────────────────────────── -->
-<div class="stats-bar">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-item__num">12</div>
-        <div class="stat-item__label">Articles Published</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-item__num">7</div>
-        <div class="stat-item__label">Topic Categories</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-item__num">6</div>
-        <div class="stat-item__label">Expert Contributors</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-item__num">∞</div>
-        <div class="stat-item__label">Growing Archive</div>
-      </div>
-    </div>
-  </div>
+<!-- ── About Strip ───────────────────────────────────────────── -->
+<div class="hf-about-strip">
+  <h2>What is HARDFACTS?</h2>
+  <p>
+    Investigative analysis on geopolitics, power, and the stories mainstream media under-reports.
+    No filler, no spin — only the evidence and what it means.
+  </p>
 </div>
 
 <!-- ── Newsletter ────────────────────────────────────────────── -->
 <section class="newsletter-section" id="newsletter">
   <div class="container">
     <div class="newsletter-eyebrow">Stay Informed</div>
-    <h2 class="newsletter-title">Analysis Worth Reading,<br>Delivered to You</h2>
+    <h2 class="newsletter-title">Get Every Article<br>Delivered to You</h2>
     <p class="newsletter-subtitle">
-      Join readers who value depth over noise. New pieces published regularly — no filler, no fluff.
+      New investigations published regularly. No noise, no spam — just analysis that matters.
     </p>
     <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
       <input type="email" placeholder="your@email.com" required aria-label="Email address">
       <button type="submit">Subscribe Free</button>
     </form>
-    <p class="newsletter-note">Free forever. No spam. Unsubscribe anytime.</p>
+    <p class="newsletter-note">Free forever. Unsubscribe anytime.</p>
   </div>
 </section>
-
-</main>
 
 <!-- ── Footer ────────────────────────────────────────────────── -->
 <footer class="site-footer" role="contentinfo">
@@ -411,38 +309,25 @@
     <div class="footer-grid">
 
       <div>
-        <div class="footer-brand__logo">MERIDIAN</div>
-        <div class="footer-brand__tagline">Analysis · Insight · Clarity</div>
+        <div class="footer-brand__logo">HARDFACTS</div>
+        <div class="footer-brand__tagline">Truth Without Filter</div>
         <p class="footer-brand__desc">
-          MERIDIAN is an independent analytical publication dedicated to rigorous, accessible analysis of the ideas and events shaping our world. Free to read, always.
+          Independent investigative reporting on geopolitics and power. Free to read, always.
         </p>
-        <div class="footer-social">
-          <a href="#" aria-label="Twitter/X" title="Follow on X">𝕏</a>
-          <a href="#" aria-label="LinkedIn" title="Follow on LinkedIn">in</a>
-          <a href="#" aria-label="RSS Feed" title="RSS Feed">⊕</a>
-        </div>
       </div>
 
       <div class="footer-col">
-        <div class="footer-col__title">Topics</div>
+        <div class="footer-col__title">Articles</div>
         <ul>
-          <li><a href="category.html?cat=Technology">Technology</a></li>
-          <li><a href="category.html?cat=Economy">Economy</a></li>
-          <li><a href="category.html?cat=Geopolitics">Geopolitics</a></li>
-          <li><a href="category.html?cat=Science">Science</a></li>
-          <li><a href="category.html?cat=Culture">Culture</a></li>
-          <li><a href="category.html?cat=Environment">Environment</a></li>
-          <li><a href="category.html?cat=Politics">Politics</a></li>
+          <li><a href="article.html?slug=usa-exploitation-iraq">USA &amp; Iraq: The Full Story</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <div class="footer-col__title">Publication</div>
         <ul>
-          <li><a href="about.html">About MERIDIAN</a></li>
-          <li><a href="archive.html">Article Archive</a></li>
           <li><a href="#newsletter">Newsletter</a></li>
-          <li><a href="about.html#contributors">Contributors</a></li>
+          <li><a href="#">Contact</a></li>
         </ul>
       </div>
 
@@ -451,19 +336,16 @@
         <ul>
           <li><a href="#">Privacy Policy</a></li>
           <li><a href="#">Terms of Use</a></li>
-          <li><a href="#">Editorial Standards</a></li>
-          <li><a href="#">Contact</a></li>
         </ul>
       </div>
 
     </div>
 
     <div class="footer-bottom">
-      <span class="footer-bottom__copy">© 2026 MERIDIAN. All rights reserved. Free to read.</span>
+      <span class="footer-bottom__copy">© 2026 HARDFACTS. All rights reserved. Free to read.</span>
       <div class="footer-bottom__links">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
-        <a href="about.html">About</a>
       </div>
     </div>
   </div>
@@ -471,38 +353,6 @@
 
 <script src="js/articles-data.js"></script>
 <script src="js/main.js"></script>
-<script>
-  // Render articles list
-  document.addEventListener('DOMContentLoaded', () => {
-    const list = document.getElementById('articles-list');
-    if (list && typeof getLatestArticles === 'function') {
-      list.innerHTML = getLatestArticles(8).map(a => renderHorizontalCard(a)).join('');
-    }
-
-    // Most read sidebar
-    const mostRead = document.getElementById('most-read-list');
-    if (mostRead && typeof ARTICLES !== 'undefined') {
-      mostRead.innerHTML = ARTICLES.slice(0, 5).map((a, i) => renderRankedCard(a, i + 1)).join('');
-    }
-
-    // Category explorer sidebar
-    const catExplorer = document.getElementById('category-explorer');
-    if (catExplorer && typeof CATEGORIES !== 'undefined') {
-      catExplorer.innerHTML = CATEGORIES.map(c => `
-        <a href="category.html?cat=${c.name}"
-           style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text-secondary);transition:all 0.2s;text-decoration:none"
-           onmouseover="this.style.borderColor='${c.color}';this.style.color='${c.color}'"
-           onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">
-          <span>${c.name}</span>
-          <span style="font-size:11px;color:var(--text-light)">${ARTICLES.filter(a=>a.category===c.name).length} articles</span>
-        </a>
-      `).join('');
-    }
-
-    // Category tab filtering
-    initCategoryTabs('category-tabs', 'articles-list');
-  });
-</script>
 
 </body>
 </html>

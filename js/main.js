@@ -1,5 +1,5 @@
 /* ============================================================
-   MERIDIAN — Main JavaScript
+   HARDFACTS — Main JavaScript
    Navigation, search, theme, article rendering utilities
    ============================================================ */
 
@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── Theme (dark/light) ─────────────────────────────────────── */
 function initTheme() {
-  const saved = localStorage.getItem('meridian-theme') || 'light';
+  const saved = localStorage.getItem('hardfacts-theme') || 'light';
   applyTheme(saved);
 }
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('meridian-theme', theme);
+  localStorage.setItem('hardfacts-theme', theme);
   const icon = document.getElementById('theme-icon');
   if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙';
 }
@@ -242,9 +242,9 @@ function loadArticlePage() {
   if (!slug || typeof getArticleBySlug !== 'function') return;
 
   const article = getArticleBySlug(slug);
-  if (!article) { document.title = 'Article Not Found — MERIDIAN'; return; }
+  if (!article) { document.title = 'Article Not Found — HARDFACTS'; return; }
 
-  document.title = article.title + ' — MERIDIAN';
+  document.title = article.title + ' — HARDFACTS';
 
   setEl('article-cat',     `<span class="category-tag" data-cat="${article.category}">${article.category}</span>`);
   setEl('article-title',   article.title);
@@ -287,50 +287,53 @@ function setEl(id, html) {
 }
 
 function generateArticleBody(article) {
-  // Generate rich placeholder body text for each article
   const bodies = {
-    "ai-reshaping-global-labor-markets": `
-      <p>When economists at the McKinsey Global Institute published their landmark 2017 study projecting that automation would displace 400-800 million workers by 2030, they envisioned a familiar pattern: first the assembly lines, then the knowledge workers. The robot would arrive at the factory gate before it knocked on the office door.</p>
-      <p>The data from 2023 to 2025 suggests something more complicated — and more disquieting — has unfolded instead.</p>
-      <h2>The Inversion Nobody Predicted</h2>
-      <p>Generative AI, which reached mass adoption between 2023 and 2024, proved most immediately disruptive to tasks that were once considered quintessentially human: drafting legal briefs, generating financial reports, producing marketing copy, writing code. The factory floor, by contrast, proved harder to automate than anticipated — physical manipulation in unstructured environments remains genuinely difficult for robotics.</p>
-      <blockquote><p>"We're witnessing a skills inversion in real time. The workers who were told automation-proofing themselves required more education are discovering that education alone wasn't the shield they were promised."</p></blockquote>
-      <p>The Bureau of Labor Statistics data through Q3 2025 shows that employment in sectors like legal services, marketing, and entry-level software development has contracted faster than manufacturing, which has actually added jobs in some subsectors due to reshoring trends and the growing complexity of supply chain management.</p>
-      <h2>The 'Complementarity' Argument Under Scrutiny</h2>
-      <p>Economic orthodoxy held that automation historically creates as many jobs as it destroys by complementing human labor rather than replacing it. The steam engine made mill workers more productive; the spreadsheet created the modern CFO role. Why should this time be different?</p>
-      <p>Proponents of this view point to emerging job categories: AI trainers, prompt engineers, AI output auditors. But critics note that these roles are far fewer in number than the tasks being displaced, and that the complementarity argument may be temporally compressed in ways that make the transition more difficult even if the endpoint is the same.</p>
-      <h2>What the New Labor Market Actually Rewards</h2>
-      <p>Three categories of work appear genuinely resistant to current AI capabilities:</p>
-      <p><strong>Complex physical manipulation:</strong> Plumbers, electricians, and surgeons performing dexterous tasks in unstructured environments. The physical world remains hard to automate at human cost points.</p>
-      <p><strong>High-stakes interpersonal judgment:</strong> Therapists, mediators, and senior executives making consequential decisions where accountability and trust matter as much as the decision itself.</p>
-      <p><strong>Novel problem framing:</strong> The ability to identify what question should be asked, rather than answer a question already posed, remains difficult to systematize.</p>
-      <p>The implication is uncomfortable: the credential-credential path to economic security — school, degree, white-collar job — needs fundamental rethinking at a pace that educational institutions are poorly equipped to achieve.</p>
-      <h2>Policy Responses and Their Gaps</h2>
-      <p>The European Union's AI Act, fully in force since 2025, focuses heavily on safety and transparency requirements but says relatively little about labor market transition. The United States has relied primarily on existing unemployment insurance architecture, which was designed for cyclical job loss, not structural technological displacement.</p>
-      <p>A handful of cities — notably Helsinki, Seoul, and Denver — have piloted variants of skills voucher programs, offering workers displaced by automation credits toward retraining. Early results are mixed, primarily because the bottleneck isn't access to training, it's clarity about which skills to train for in an environment where AI capabilities are themselves evolving rapidly.</p>
-      <p>The picture that emerges from two years of data is not the clean narrative of human-machine collaboration that dominated business school case studies circa 2022. It's messier, faster, and less evenly distributed than the optimists projected. The adjustment mechanisms built for previous waves of technological change may be structurally mismatched with this one.</p>
-    `,
-    "default": `
-      <p>${article.excerpt}</p>
-      <p>The implications of this development stretch far beyond what the immediate data suggests. To understand the full significance, it helps to examine the historical context and the specific mechanisms through which this phenomenon operates.</p>
-      <h2>The Analytical Framework</h2>
-      <p>Analysts who have studied this space most carefully tend to avoid the polarized narratives that dominate public discourse. Neither pure optimism nor catastrophism captures the complexity of what is actually unfolding.</p>
-      <p>The structural factors driving this development include both long-term trends that have been building for decades and more recent catalysts that have accelerated the pace of change beyond what most forecasters anticipated.</p>
-      <blockquote><p>"The question is no longer whether this will reshape the landscape, but how fast, and who will be positioned to navigate the transition effectively."</p></blockquote>
-      <h2>What the Evidence Shows</h2>
-      <p>The data available through early 2026 paints a picture that is more nuanced than either advocates or critics typically acknowledge. Positive effects have been concentrated in certain domains, while negative externalities have emerged in others that received less attention in the initial analysis.</p>
-      <p>Three variables appear most significant for understanding the divergent outcomes observed across different contexts and regions:</p>
-      <p>First, the institutional environment in which these changes are unfolding matters enormously. The same underlying dynamic produces different results depending on the governance frameworks, regulatory architectures, and social safety nets in place.</p>
-      <p>Second, the distributional effects have been more uneven than aggregate statistics suggest. Headline numbers often mask significant variation across demographic groups, geographies, and economic strata.</p>
-      <p>Third, second-order effects — the systemic responses that develop in reaction to first-order changes — are beginning to emerge in ways that will likely reshape the trajectory significantly over the next 18-24 months.</p>
-      <h2>Looking Ahead</h2>
-      <p>The most honest answer to where this is heading is that genuine uncertainty remains, and anyone claiming confident prediction deserves skepticism. The variables in play are too numerous and too interconnected for reliable point estimates.</p>
-      <p>What can be said with more confidence is that the decisions made in the next 12-24 months — by governments, by institutions, by individuals — will substantially determine which of several plausible futures materializes. The range of outcomes remains wide. The window for influencing which direction things move is narrowing.</p>
-      <p>That is both the sobering conclusion and the grounds for engagement rather than fatalism.</p>
+    "usa-exploitation-iraq": `
+      <p>On March 20, 2003, the United States and a "coalition of the willing" invaded Iraq. The stated justification: Saddam Hussein possessed weapons of mass destruction — biological agents, chemical stockpiles, and an active nuclear program that posed an imminent threat to global security. Within weeks of the invasion, it became clear that none of these weapons existed. The intelligence had been wrong, or worse, deliberately manipulated.</p>
+      <p>What followed over the next two decades tells a story that goes far beyond a simple intelligence failure. It is a story of systematic exploitation — of oil, of geography, of a shattered state — that continues to this day.</p>
+
+      <h2>The Lie That Launched a War</h2>
+      <p>The case for war rested primarily on two pillars: the CIA's National Intelligence Estimate of October 2002, which assessed with "high confidence" that Iraq was reconstituting its nuclear weapons program, and Secretary of State Colin Powell's February 2003 presentation to the UN Security Council, which displayed satellite images and intercepted communications as proof of active WMD programs.</p>
+      <p>The Downing Street Memo, a classified British government document leaked in 2005, revealed that senior UK officials had concluded as early as July 2002 that "intelligence and facts were being fixed around the policy." In other words, the decision to go to war had already been made — the intelligence was then shaped to justify it.</p>
+      <blockquote><p>"The intelligence and facts were being fixed around the policy. The NSC had no patience with the UN route, and no enthusiasm for publishing material on the Iraqi regime's record. There was little discussion in Washington of the aftermath after military action."<br><em>— Downing Street Memo, July 23, 2002</em></p></blockquote>
+      <p>The Iraq Survey Group, established by the US itself after the invasion, concluded in its final 2004 report that Iraq had no active WMD programs at the time of the invasion. Saddam had dismantled them after the Gulf War. The justification for the entire war was a fabrication.</p>
+
+      <h2>The Oil That Was Always the Point</h2>
+      <p>Iraq sits atop the world's fifth-largest proven oil reserves — approximately 145 billion barrels. Before the invasion, Iraq's oil sector was nationalized, controlled by the state-owned Iraq National Oil Company (INOC), and its contracts were largely held by French, Russian, and Chinese companies. American and British oil majors were locked out.</p>
+      <p>Within two years of the invasion, that had changed dramatically. The Coalition Provisional Authority (CPA), led by L. Paul Bremer III, issued Order 39, which opened Iraq's economy — including its oil sector — to full foreign ownership and profit repatriation. This was a radical restructuring of an entire nation's economic architecture, imposed by an occupying power with no democratic mandate from the Iraqi people.</p>
+      <p>By 2009, Iraq's government had signed long-term service contracts with ExxonMobil, BP, Shell, and other Western majors. The contracts were structured as "technical service agreements," allowing companies to sidestep constitutional restrictions on foreign ownership of oil resources — but the economic benefits flowed primarily outward. Iraq's oil production today exceeds 4 million barrels per day, generating revenues of approximately $90 billion annually. And yet, according to the World Bank, 22.5% of Iraq's population lives in poverty, and basic infrastructure — electricity, clean water, healthcare — remains severely degraded compared to pre-war levels.</p>
+
+      <h2>The Permanent Military Footprint</h2>
+      <p>The US military's presence in Iraq was never simply about defeating Saddam Hussein. The Pentagon constructed a network of large, permanent-grade military installations — Balad Air Base, Camp Victory near Baghdad, and Ain al-Assad in Anbar Province — designed not for temporary occupation but for long-term strategic positioning in the heart of the Middle East.</p>
+      <p>Ain al-Assad Air Base, which expanded significantly after 2003, now functions as one of the largest US military installations in the region. It hosts thousands of troops and contractor personnel, advanced surveillance systems, and serves as a key hub for US military operations across Iraq, Syria, and beyond. The base was never built for the Iraqi people. It was built for American strategic projection.</p>
+      <p>The Status of Forces Agreement signed in 2008 nominally required US troop withdrawal by the end of 2011. US forces did formally withdraw — then returned in 2014 under the pretext of fighting ISIS, a terrorist group that emerged partly from the power vacuum the 2003 invasion created. Today, approximately 2,500 US troops remain in Iraq, with a much larger presence of contractors and intelligence personnel. The Iraqi parliament voted in January 2020 to expel all foreign troops following the US assassination of Iranian General Qasem Soleimani on Iraqi soil — an act of war conducted without Iraqi permission, on Iraqi territory. The US government largely ignored the vote.</p>
+
+      <h2>The Human Cost: What the Numbers Actually Say</h2>
+      <p>The Iraq Body Count project documented between 183,000 and 206,000 civilian deaths from direct violence between 2003 and 2019. The Lancet medical journal's 2006 study, using epidemiological methods, estimated approximately 655,000 excess deaths attributable to the war in the first three years alone — a figure disputed but never definitively refuted.</p>
+      <p>Beyond the dead: an estimated 3.3 million Iraqis were internally displaced by the conflict. Millions more fled the country. Iraq's Christian community, which numbered approximately 1.5 million before 2003, has been reduced to fewer than 200,000 — a direct consequence of the sectarian violence the invasion unleashed. The country's professional class — doctors, engineers, academics — left in waves. This "brain drain" has impaired Iraq's capacity for reconstruction to this day.</p>
+      <blockquote><p>"We came to Iraq to liberate it. Instead we destroyed the infrastructure of a state that had existed for millennia, and handed the pieces to competing factions and foreign interests."<br><em>— Former US Army Colonel, Congressional testimony, 2007</em></p></blockquote>
+
+      <h2>The Looting of History</h2>
+      <p>In the days following the fall of Baghdad in April 2003, the Iraq Museum — home to one of the world's greatest collections of ancient Mesopotamian artifacts — was looted. Approximately 15,000 objects were stolen, including items from Ur, Nineveh, and Babylon. US forces, which had been specifically briefed on the museum's location and importance by archaeologists before the invasion, did nothing to protect it. The Pentagon had detailed plans for protecting oil infrastructure. No equivalent plan existed for cultural heritage sites.</p>
+      <p>Thousands of archaeological sites across Iraq were subsequently looted as the security vacuum persisted. Entire civilizations — Sumerian, Akkadian, Babylonian, Assyrian — had their material record plundered and sold on the international antiquities market, much of it ultimately appearing in Western private collections and institutions.</p>
+
+      <h2>The IMF Conditions: Economic Exploitation Formalized</h2>
+      <p>As Iraq attempted to rebuild its shattered economy, it turned to international financial institutions for support. The International Monetary Fund's assistance came with conditions — a familiar pattern known as "structural adjustment." Iraq was required to reduce fuel subsidies (which were critical for a population with already devastated purchasing power), privatize state enterprises, and liberalize trade in ways that exposed Iraqi industry to competition it could not survive.</p>
+      <p>The result was predictable: unemployment spiked, the private sector did not materialize as promised, and the removal of subsidies hit the poorest Iraqis hardest. The conditions reflected not the interests of the Iraqi people but the ideological preferences of Western financial institutions and the economic interests of Western corporations positioned to benefit from an open Iraqi market.</p>
+
+      <h2>What Continues Today</h2>
+      <p>Iraq in 2026 is a country still living in the shadow of what was done to it. The sectarian political system imposed by the occupation — distributing power along ethnic and religious lines rather than civic ones — has produced a governing class characterized by endemic corruption, paralysis, and dependence on foreign patrons. Transparency International consistently ranks Iraq among the most corrupt countries in the world.</p>
+      <p>US influence over Iraq's political system remains substantial, exercised through diplomatic pressure, military presence, and economic leverage. When Iraqi political leaders have moved too close to Iran or proposed policies unfavorable to US interests, American officials have intervened — sometimes publicly, sometimes covertly — to shape outcomes. This is not the behavior of a liberator. It is the behavior of an imperial power managing a client state.</p>
+      <p>Meanwhile, Iraq's oil revenues, which should fund reconstruction and development, are siphoned off by corruption, mismanagement, and the financial terms of oil service agreements that were structured to benefit international companies. The Iraqi people — who own this oil by constitutional right — see a fraction of its value.</p>
+
+      <h2>The Hard Conclusion</h2>
+      <p>What happened in Iraq was not a failed liberation. It was a successful exploitation, dressed in the language of liberation. The weapons of mass destruction were a pretext. The democracy promotion was a pretext. The underlying reality was the projection of American power into a strategically vital region, the opening of Iraq's economy to Western capital, and the securing of long-term military positioning in the Middle East.</p>
+      <p>The people who paid the price — in lives, in displacement, in destroyed infrastructure, in looted heritage, in a political system that serves everyone except them — were the Iraqis. More than two decades later, that bill is still being paid.</p>
+      <p>The least we can do is stop pretending we don't know what happened.</p>
     `
   };
 
-  return bodies[article.slug] || bodies["default"];
+  return bodies[article.slug] || `<p>${article.excerpt}</p><p>Full article content coming soon.</p>`;
 }
 
 /* ── Archive page loader ─────────────────────────────────────── */
@@ -357,7 +360,7 @@ function loadCategoryPage() {
 
   setEl('cat-name',  cat);
   setEl('cat-desc',  meta ? meta.desc : '');
-  document.title = cat + ' — MERIDIAN';
+  document.title = cat + ' — HARDFACTS';
 
   const catTag = document.querySelector('.cat-hero .category-tag');
   if (catTag) { catTag.dataset.cat = cat; catTag.textContent = cat; }
