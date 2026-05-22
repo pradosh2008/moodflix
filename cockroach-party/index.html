@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cockroach Party — We Survive. We Rise. We Stand For All.</title>
+  <meta name="description" content="The Cockroach Party stands for equality, justice, and democracy. We are resilient, we are everywhere, and we cannot be crushed.">
+  <meta property="og:title" content="Cockroach Party — For the Many. Always.">
+  <meta property="og:description" content="We survive. We rise. We stand for equality, justice, and democracy.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ══════════════════════════════════════════════
+       COCKROACH PARTY — Equality · Justice · Democracy
+    ══════════════════════════════════════════════ */
+
+    :root {
+      --bg:          #07100A;
+      --surface:     #0D1A10;
+      --surface2:    #122018;
+      --green:       #1B6B3A;
+      --green-light: #27A857;
+      --gold:        #C9A035;
+      --gold-light:  #E8C76A;
+      --red:         #C0392B;
+      --text:        #F0F7F1;
+      --text-dim:    rgba(240,247,241,0.55);
+      --text-faint:  rgba(240,247,241,0.25);
+      --border:      rgba(255,255,255,0.07);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── UTILITIES ─────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .serif { font-family: 'Playfair Display', Georgia, serif; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+    /* ── NAV ────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 68px;
+      background: linear-gradient(to bottom, rgba(7,16,10,0.92) 0%, transparent 100%);
+      transition: background 0.35s ease, box-shadow 0.35s ease;
+    }
+    .nav.scrolled {
+      background: rgba(7,16,10,0.97);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav__inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .nav__icon {
+      font-size: 26px;
+      line-height: 1;
+    }
+    .nav__name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+    }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav__links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dim);
+      padding: 6px 14px;
+      border-radius: 4px;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav__links a:hover { color: var(--text); }
+    .nav__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--green-light);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 9px 20px;
+      border-radius: 4px;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav__cta:hover { background: var(--green); transform: translateY(-1px); }
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      flex-shrink: 0;
+    }
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── HERO ───────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--bg);
+      padding: 100px 0 80px;
+    }
+
+    /* Deep forest atmosphere */
+    .hero__atmosphere {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 60%, rgba(27,107,58,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 80% 30%, rgba(201,160,53,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 30% 50% at 20% 80%, rgba(27,107,58,0.08) 0%, transparent 50%);
+    }
+
+    /* Watermark */
+    .hero__watermark {
+      position: absolute;
+      right: -3%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: clamp(180px, 22vw, 380px);
+      line-height: 1;
+      opacity: 0.04;
+      user-select: none;
+      pointer-events: none;
+      filter: blur(1px);
+    }
+
+    /* Vignette */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(7,16,10,1) 30%, rgba(7,16,10,0.7) 60%, rgba(7,16,10,0.2) 85%, transparent 100%),
+        linear-gradient(to top, rgba(7,16,10,0.7) 0%, transparent 30%);
+      pointer-events: none;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .hero__badge-line { width: 40px; height: 2px; background: var(--gold); }
+    .hero__badge-text {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .hero__badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green-light);
+      animation: live-pulse 2s ease-in-out infinite;
+    }
+    @keyframes live-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.3; transform: scale(0.6); }
+    }
+
+    .hero__title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(46px, 7vw, 92px);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+    .hero__title-accent {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero__tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 2.5vw, 28px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--green-light);
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero__desc {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-bottom: 44px;
+      max-width: 560px;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--green-light);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 34px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .btn-primary:hover { background: #1e8a46; transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 16px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.12); }
+
+    /* Stats strip in hero */
+    .hero__stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .hero__stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero__stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    /* ── MARQUEE STRIP ──────────────────────────── */
+    .marquee-strip {
+      background: var(--green);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 25s linear infinite;
+    }
+    .marquee-item {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      padding: 0 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .marquee-item::after { content: '✦'; opacity: 0.5; font-size: 10px; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION BASE ────────────────────────────── */
+    .section { padding: 96px 0; }
+    .section--dark { background: var(--surface); }
+    .section--darker { background: var(--bg); }
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+    .section-sub {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--text-dim);
+      line-height: 1.78;
+      max-width: 600px;
+    }
+    .section-header { margin-bottom: 56px; }
+    .section-header--center { text-align: center; }
+    .section-header--center .section-sub { margin: 0 auto; }
+
+    /* ── WHY COCKROACH ───────────────────────────── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .why-icon-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 320px;
+    }
+    .why-icon-bg {
+      position: absolute;
+      font-size: 200px;
+      opacity: 0.06;
+      filter: blur(4px);
+      user-select: none;
+    }
+    .why-icon-main {
+      font-size: 120px;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 40px rgba(39,168,87,0.3));
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50%       { transform: translateY(-14px) rotate(5deg); }
+    }
+    .why-points {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .why-point {
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      background: var(--surface2);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .why-point:hover { border-color: rgba(39,168,87,0.3); }
+    .why-point__icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .why-point__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .why-point__text {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* ── VALUES ──────────────────────────────────── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .value-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .value-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(39,168,87,0.35);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+    }
+    .value-card__icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .value-card__title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .value-card__text {
+      font-family: 'Source Serif 4', serif;
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.75;
+    }
+    .value-card__line {
+      width: 40px;
+      height: 3px;
+      border-radius: 2px;
+      margin: 20px auto 0;
+    }
+
+    /* ── POLICY PILLARS ──────────────────────────── */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .pillar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 24px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+    .pillar:hover {
+      border-color: rgba(201,160,53,0.3);
+      transform: translateY(-4px);
+    }
+    .pillar__num {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 900;
+      color: rgba(39,168,87,0.15);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .pillar__icon { font-size: 28px; margin-bottom: 12px; display: block; }
+    .pillar__title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .pillar__text {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* ── MANIFESTO QUOTE ─────────────────────────── */
+    .manifesto {
+      background: var(--green);
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .manifesto::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,0,0,0.3) 0%, transparent 70%);
+    }
+    .manifesto__inner { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; }
+    .manifesto__quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 120px;
+      line-height: 0.6;
+      color: rgba(255,255,255,0.15);
+      margin-bottom: 24px;
+    }
+    .manifesto__text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3.5vw, 42px);
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.35;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+    .manifesto__attr {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ── JOIN SECTION ────────────────────────────── */
+    .join {
+      padding: 100px 0;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .join::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(27,107,58,0.12) 0%, transparent 65%);
+    }
+    .join__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 580px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .join__form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .join__form-row { display: flex; gap: 12px; }
+    .join__input {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 14px 18px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .join__input::placeholder { color: rgba(255,255,255,0.28); }
+    .join__input:focus { border-color: var(--green-light); }
+    .join__select {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 14px 18px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      cursor: pointer;
+    }
+    .join__select option { background: #0d1a10; }
+    .join__btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--green-light);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .join__btn:hover { background: #1e8a46; }
+    .join__note { font-size: 12px; color: var(--text-faint); margin-top: 10px; }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    .footer {
+      background: #040A06;
+      padding: 64px 0 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer__brand-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer__brand-tag {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(201,160,53,0.4);
+      margin-bottom: 14px;
+    }
+    .footer__brand-desc {
+      font-size: 13px;
+      color: var(--text-faint);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .footer__social { display: flex; gap: 10px; }
+    .footer__social a {
+      width: 34px; height: 34px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      color: var(--text-faint);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .footer__social a:hover { border-color: var(--green-light); color: var(--green-light); }
+    .footer__col-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 16px;
+    }
+    .footer__col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer__col ul a {
+      font-size: 13px;
+      color: var(--text-faint);
+      transition: color 0.2s;
+    }
+    .footer__col ul a:hover { color: var(--text); }
+    .footer__bottom {
+      border-top: 1px solid var(--border);
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer__copy { font-size: 12px; color: var(--text-faint); }
+    .footer__bottom-links { display: flex; gap: 20px; }
+    .footer__bottom-links a { font-size: 12px; color: var(--text-faint); transition: color 0.2s; }
+    .footer__bottom-links a:hover { color: rgba(255,255,255,0.5); }
+
+    /* ── ANIMATIONS ──────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 1024px) {
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .footer__grid { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-icon-wrap { height: 200px; }
+    }
+    @media (max-width: 768px) {
+      .nav__links { display: none; }
+      .nav__hamburger { display: flex; }
+      .values-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .footer__grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer__bottom { flex-direction: column; text-align: center; }
+      .hero__stats { gap: 24px; }
+      .join__form-row { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .hero__actions { flex-direction: column; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+      .manifesto__text { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────── -->
+<header class="nav" id="navbar">
+  <div class="container nav__inner">
+    <a href="#" class="nav__logo" aria-label="Cockroach Party Home">
+      <span class="nav__icon">🪳</span>
+      <span class="nav__name">Cockroach Party</span>
+    </a>
+    <nav class="nav__links" aria-label="Main navigation">
+      <a href="#why">Why We Rise</a>
+      <a href="#values">Our Values</a>
+      <a href="#pillars">Policies</a>
+      <a href="#manifesto">Manifesto</a>
+      <a href="#join">Join Us</a>
+    </nav>
+    <a href="#join" class="nav__cta">
+      Join the Movement
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <button class="nav__hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── HERO ─────────────────────────────────────── -->
+<section class="hero" id="home" aria-label="Hero">
+  <div class="hero__atmosphere"></div>
+  <div class="hero__watermark" aria-hidden="true">🪳</div>
+
+  <div class="container">
+    <div class="hero__content">
+
+      <div class="hero__badge">
+        <span class="hero__badge-line"></span>
+        <span class="hero__badge-text">For the Many. Always.</span>
+        <span class="hero__badge-dot"></span>
+      </div>
+
+      <h1 class="hero__title">
+        The<br>
+        <span class="hero__title-accent">Cockroach</span><br>
+        Party
+      </h1>
+
+      <p class="hero__tagline">We Survive. We Rise. We Stand For All.</p>
+
+      <p class="hero__desc">
+        Like the cockroach — resilient, everywhere, and impossible to crush —
+        we stand with the people. For equality, for justice, for a democracy
+        that truly belongs to everyone.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#join" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          Join the Movement
+        </a>
+        <a href="#why" class="btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          Learn More
+        </a>
+      </div>
+
+      <div class="hero__stats">
+        <div>
+          <div class="hero__stat-num">350M+</div>
+          <div class="hero__stat-label">Years of Resilience</div>
+        </div>
+        <div>
+          <div class="hero__stat-num">3</div>
+          <div class="hero__stat-label">Core Values</div>
+        </div>
+        <div>
+          <div class="hero__stat-num">1</div>
+          <div class="hero__stat-label">Goal: A Just World</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ───────────────────────────────────── -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Equality for All</span>
+    <span class="marquee-item">Justice Without Compromise</span>
+    <span class="marquee-item">Democracy for the People</span>
+    <span class="marquee-item">We Cannot Be Crushed</span>
+    <span class="marquee-item">Resilience is Our Strength</span>
+    <span class="marquee-item">One Vote One Voice</span>
+    <span class="marquee-item">Equality for All</span>
+    <span class="marquee-item">Justice Without Compromise</span>
+    <span class="marquee-item">Democracy for the People</span>
+    <span class="marquee-item">We Cannot Be Crushed</span>
+    <span class="marquee-item">Resilience is Our Strength</span>
+    <span class="marquee-item">One Vote One Voice</span>
+  </div>
+</div>
+
+<!-- ── WHY COCKROACH ─────────────────────────────── -->
+<section class="section section--dark" id="why">
+  <div class="container">
+    <div class="why-grid">
+
+      <div class="why-icon-wrap reveal">
+        <div class="why-icon-bg" aria-hidden="true">🪳</div>
+        <div class="why-icon-main" aria-hidden="true">🪳</div>
+      </div>
+
+      <div>
+        <div class="section-label reveal">Why the Cockroach?</div>
+        <h2 class="section-title reveal">
+          The Most <em>Resilient</em><br>Creature on Earth
+        </h2>
+        <p class="section-sub reveal" style="margin-bottom:36px">
+          The cockroach has survived for 350 million years — through extinctions,
+          through oppression, through every attempt to crush it. That is us.
+          That is the people.
+        </p>
+
+        <div class="why-points">
+          <div class="why-point reveal">
+            <div class="why-point__icon">💪</div>
+            <div>
+              <div class="why-point__title">We Cannot Be Crushed</div>
+              <div class="why-point__text">No matter the forces against us — inequality, corruption, injustice — the movement of the people endures. We always rise.</div>
+            </div>
+          </div>
+          <div class="why-point reveal">
+            <div class="why-point__icon">🌍</div>
+            <div>
+              <div class="why-point__title">We Are Everywhere</div>
+              <div class="why-point__text">We represent every community, every class, every background. Justice is not for the few — it belongs to all of humanity.</div>
+            </div>
+          </div>
+          <div class="why-point reveal">
+            <div class="why-point__icon">⚡</div>
+            <div>
+              <div class="why-point__title">We Adapt and Survive</div>
+              <div class="why-point__text">The world changes. Power shifts. But our values — equality, justice, democracy — are timeless. We adapt our methods, never our principles.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── VALUES ────────────────────────────────────── -->
+<section class="section section--darker" id="values">
+  <div class="container">
+    <div class="section-header section-header--center reveal">
+      <div class="section-label">What We Stand For</div>
+      <h2 class="section-title">Three Pillars of <em>Truth</em></h2>
+      <p class="section-sub">
+        Everything we do flows from three unbreakable commitments. These are not
+        policies — they are who we are.
+      </p>
+    </div>
+
+    <div class="values-grid">
+
+      <div class="value-card reveal">
+        <span class="value-card__icon">⚖️</span>
+        <div class="value-card__title">Equality</div>
+        <p class="value-card__text">
+          Every human being is born with equal worth and equal rights. Not equal in circumstance — but equal in dignity, in opportunity, and before the law. We fight for a world where your birth does not determine your destiny.
+        </p>
+        <div class="value-card__line" style="background:#27A857"></div>
+      </div>
+
+      <div class="value-card reveal">
+        <span class="value-card__icon">🔱</span>
+        <div class="value-card__title">Justice</div>
+        <p class="value-card__text">
+          Justice delayed is justice denied. We demand accountability — from governments, from corporations, from the powerful. No one is above the law, and no one should be left behind it. Justice must be blind, swift, and real.
+        </p>
+        <div class="value-card__line" style="background:#C9A035"></div>
+      </div>
+
+      <div class="value-card reveal">
+        <span class="value-card__icon">🗳️</span>
+        <div class="value-card__title">Democracy</div>
+        <p class="value-card__text">
+          Democracy is not a building or a ballot box — it is a living practice. We defend the right of every citizen to participate, to be heard, and to hold power accountable. Government of the people, by the people, for the people.
+        </p>
+        <div class="value-card__line" style="background:#3B82F6"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── POLICY PILLARS ─────────────────────────────── -->
+<section class="section section--dark" id="pillars">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Our Platform</div>
+      <h2 class="section-title">What We Will <em>Build</em></h2>
+      <p class="section-sub">
+        Six concrete areas where we will fight hardest to create a fairer, more just society.
+      </p>
+    </div>
+
+    <div class="pillars-grid">
+
+      <div class="pillar reveal">
+        <div class="pillar__num">01</div>
+        <span class="pillar__icon">🏥</span>
+        <div class="pillar__title">Universal Healthcare</div>
+        <p class="pillar__text">Healthcare is a human right, not a commodity. Every person deserves access to quality medical care regardless of income, postcode, or status.</p>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar__num">02</div>
+        <span class="pillar__icon">🎓</span>
+        <div class="pillar__title">Free Education</div>
+        <p class="pillar__text">Knowledge should never be locked behind wealth. From early childhood to university, we fight for education that empowers every child equally.</p>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar__num">03</div>
+        <span class="pillar__icon">🌱</span>
+        <div class="pillar__title">Climate Justice</div>
+        <p class="pillar__text">The climate crisis is an equality crisis. The poor suffer most while the wealthy pollute most. We demand a green transition that is just and fair for all.</p>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar__num">04</div>
+        <span class="pillar__icon">🏘️</span>
+        <div class="pillar__title">Housing for All</div>
+        <p class="pillar__text">A home is not a luxury. We will end homelessness, cap exploitative rents, and ensure that every family has a safe and stable place to live.</p>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar__num">05</div>
+        <span class="pillar__icon">💼</span>
+        <div class="pillar__title">Economic Fairness</div>
+        <p class="pillar__text">When the top 1% hold more wealth than the bottom 50%, the system is broken. We fight for fair wages, progressive taxation, and an end to corporate capture of democracy.</p>
+      </div>
+
+      <div class="pillar reveal">
+        <div class="pillar__num">06</div>
+        <span class="pillar__icon">🤝</span>
+        <div class="pillar__title">Civil Rights</div>
+        <p class="pillar__text">No person should face discrimination for who they are. We will protect and extend civil rights for every gender, race, religion, and identity without exception.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── MANIFESTO ──────────────────────────────────── -->
+<section class="manifesto" id="manifesto">
+  <div class="container">
+    <div class="manifesto__inner">
+      <div class="manifesto__quote-mark" aria-hidden="true">"</div>
+      <blockquote>
+        <p class="manifesto__text">
+          "They tried to bury us. They did not know we were cockroaches. We do not die. We multiply. We adapt. We rise. And we will keep rising until justice is not the exception — but the rule."
+        </p>
+        <footer class="manifesto__attr">— The Cockroach Party Manifesto, 2026</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ── JOIN ───────────────────────────────────────── -->
+<section class="join" id="join">
+  <div class="container">
+    <div class="join__inner">
+      <div class="section-label">Rise With Us</div>
+      <h2 class="section-title" style="font-size:clamp(28px,4vw,44px)">
+        Join the <em>Movement</em>
+      </h2>
+      <p style="font-family:'Source Serif 4',serif;font-size:15px;color:var(--text-dim);line-height:1.75">
+        Democracy is a muscle — it must be exercised. Add your voice to the movement for equality, justice, and a fairer world.
+      </p>
+
+      <form class="join__form" onsubmit="handleJoin(event)">
+        <div class="join__form-row">
+          <input class="join__input" type="text" placeholder="First name" required>
+          <input class="join__input" type="text" placeholder="Last name" required>
+        </div>
+        <input class="join__input" type="email" placeholder="Email address" required>
+        <select class="join__select">
+          <option value="">How would you like to help?</option>
+          <option>Volunteer my time</option>
+          <option>Campaign in my community</option>
+          <option>Donate to the cause</option>
+          <option>Spread the word online</option>
+          <option>Just stay informed</option>
+        </select>
+        <button type="submit" class="join__btn" id="join-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.9 1.18 2 2 0 012.88 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Join the Cockroach Party
+        </button>
+        <p class="join__note">Free to join. No data sold. Ever.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+
+      <div>
+        <div class="footer__brand-logo">
+          <span>🪳</span> Cockroach Party
+        </div>
+        <div class="footer__brand-tag">Equality · Justice · Democracy</div>
+        <p class="footer__brand-desc">
+          We are resilient. We are everywhere. We cannot be crushed. A political movement for the many — not the few.
+        </p>
+        <div class="footer__social">
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">◎</a>
+          <a href="#" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <div class="footer__col-title">The Party</div>
+        <ul>
+          <li><a href="#why">Why We Rise</a></li>
+          <li><a href="#values">Our Values</a></li>
+          <li><a href="#pillars">Our Policies</a></li>
+          <li><a href="#manifesto">Manifesto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <div class="footer__col-title">Get Involved</div>
+        <ul>
+          <li><a href="#join">Join the Movement</a></li>
+          <li><a href="#">Volunteer</a></li>
+          <li><a href="#">Donate</a></li>
+          <li><a href="#">Local Chapters</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <div class="footer__col-title">Information</div>
+        <ul>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2026 Cockroach Party. Fighting for equality, justice, and democracy. Always.</span>
+      <div class="footer__bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ────────────────────────────────────── -->
+<script>
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Mobile hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.querySelector('.nav__links');
+  hamburger.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.cssText = open ? '' :
+      'display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:#07100A;border-bottom:1px solid rgba(255,255,255,0.07);padding:16px 24px 20px;z-index:99;gap:4px;';
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        navLinks.style.cssText = '';
+      }
+    });
+  });
+
+  // Join form
+  function handleJoin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('join-btn');
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Welcome to the Movement!';
+    btn.style.background = '#1B6B3A';
+    btn.disabled = true;
+    e.target.querySelectorAll('input, select').forEach(el => el.disabled = true);
+  }
+</script>
+
+</body>
+</html>
